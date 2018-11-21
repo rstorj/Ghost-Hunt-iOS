@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		987E005721A4FD0E002B3156 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987E005621A4FD0E002B3156 /* MapKit.framework */; };
+		987E005921A50F03002B3156 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 987E005821A50F03002B3156 /* Assets.xcassets */; };
+		987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E005B21A5341A002B3156 /* TimerViewController.swift */; };
+		98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */; };
 		98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B87DC5219F5D2F008D5E9B /* AppDelegate.swift */; };
-		98B87DC8219F5D2F008D5E9B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B87DC7219F5D2F008D5E9B /* ViewController.swift */; };
-		98B87DCB219F5D2F008D5E9B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98B87DC9219F5D2F008D5E9B /* Main.storyboard */; };
-		98B87DCD219F5D30008D5E9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98B87DCC219F5D30008D5E9B /* Assets.xcassets */; };
+		98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B87DC7219F5D2F008D5E9B /* MapViewController.swift */; };
 		98B87DD0219F5D30008D5E9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98B87DCE219F5D30008D5E9B /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		987E005621A4FD0E002B3156 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		987E005821A50F03002B3156 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
+		987E005B21A5341A002B3156 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		98B87DC2219F5D2F008D5E9B /* Ghost Hunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghost Hunt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98B87DC5219F5D2F008D5E9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		98B87DC7219F5D2F008D5E9B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		98B87DCA219F5D2F008D5E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		98B87DCC219F5D30008D5E9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		98B87DC7219F5D2F008D5E9B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		98B87DCF219F5D30008D5E9B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		98B87DD1219F5D30008D5E9B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -29,17 +33,44 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				987E005721A4FD0E002B3156 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		987E005521A4FD0E002B3156 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				987E005621A4FD0E002B3156 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		987E005A21A53376002B3156 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				98B87DC7219F5D2F008D5E9B /* MapViewController.swift */,
+				987E005B21A5341A002B3156 /* TimerViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		98A30A3221A5EFF800660051 /* Custom Classes */ = {
+			isa = PBXGroup;
+			children = (
+				98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */,
+			);
+			path = "Custom Classes";
+			sourceTree = "<group>";
+		};
 		98B87DB9219F5D2F008D5E9B = {
 			isa = PBXGroup;
 			children = (
 				98B87DC4219F5D2F008D5E9B /* Ghost Hunt */,
 				98B87DC3219F5D2F008D5E9B /* Products */,
+				987E005521A4FD0E002B3156 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,10 +85,10 @@
 		98B87DC4219F5D2F008D5E9B /* Ghost Hunt */ = {
 			isa = PBXGroup;
 			children = (
+				98A30A3221A5EFF800660051 /* Custom Classes */,
 				98B87DC5219F5D2F008D5E9B /* AppDelegate.swift */,
-				98B87DC7219F5D2F008D5E9B /* ViewController.swift */,
-				98B87DC9219F5D2F008D5E9B /* Main.storyboard */,
-				98B87DCC219F5D30008D5E9B /* Assets.xcassets */,
+				987E005A21A53376002B3156 /* Controllers */,
+				987E005821A50F03002B3156 /* Assets.xcassets */,
 				98B87DCE219F5D30008D5E9B /* LaunchScreen.storyboard */,
 				98B87DD1219F5D30008D5E9B /* Info.plist */,
 			);
@@ -96,6 +127,11 @@
 				TargetAttributes = {
 					98B87DC1219F5D2F008D5E9B = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -122,9 +158,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				987E005921A50F03002B3156 /* Assets.xcassets in Resources */,
 				98B87DD0219F5D30008D5E9B /* LaunchScreen.storyboard in Resources */,
-				98B87DCD219F5D30008D5E9B /* Assets.xcassets in Resources */,
-				98B87DCB219F5D2F008D5E9B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +170,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98B87DC8219F5D2F008D5E9B /* ViewController.swift in Sources */,
+				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
+				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
+				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
 				98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +180,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		98B87DC9219F5D2F008D5E9B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				98B87DCA219F5D2F008D5E9B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		98B87DCE219F5D30008D5E9B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

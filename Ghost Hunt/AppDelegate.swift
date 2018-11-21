@@ -16,7 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setupWindow()
         return true
+    }
+    
+    func setupWindow() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let viewController = MapViewController();
+        window?.rootViewController = UINavigationController(rootViewController: viewController)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
