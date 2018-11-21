@@ -12,9 +12,9 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
-    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_control_point_black_72pt")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
-    let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_72pt")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
-    let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_timer_black_72pt")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
+    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png" /*"round_control_point_black_72pt"*/)!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
+    let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
+    let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_timer_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     
     let ghostPin1 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 1 Name")   // ghost 1 pin
     let ghostPin2 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 2 Name")   // ghost 2 pin
@@ -182,7 +182,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         toggled = !toggled
         if toggled {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.toggleButton.setImage(UIImage(named: "round_arrow_drop_down_circle_black_72pt"), for: .normal)
+                self.toggleButton.setImage(UIImage(named: "round_arrow_drop_down_circle_black_36pt_2x.png"), for: .normal)
                 
                 self.ghostListButton.alpha = 1
                 self.ghostListButton.frame = CGRect(x: 36, y: self.view.frame.size.height - 72 * 2.75, width: 72, height: 72)
@@ -195,7 +195,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
         } else {
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.toggleButton.setImage(UIImage(named: "round_control_point_black_72pt"), for: .normal)
+                self.toggleButton.setImage(UIImage(named: "round_add_circle_black_36pt_2x.png"/*"round_control_point_black_72pt"*/), for: .normal)
                 
                 self.ghostListButton.isEnabled = false
                 self.ghostListButton.alpha = 0
@@ -282,7 +282,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // returns custom point annotation
     public static func generateCustomPointAnnotationWithTitle(title: String) -> CustomPointAnnotation {
         let customPointAnnotation = CustomPointAnnotation()
-        customPointAnnotation.pinImage = "round_sentiment_very_dissatisfied_black_72pt"
+        customPointAnnotation.pinImage = "round_sentiment_very_dissatisfied_black_36pt_2x.png"
         customPointAnnotation.title = title
         customPointAnnotation.subtitle = "Wandering the area..."
         return customPointAnnotation
