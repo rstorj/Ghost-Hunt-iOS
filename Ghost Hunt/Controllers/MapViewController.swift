@@ -81,7 +81,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager?.startUpdatingLocation()
     }
     
-    // tracks user location and determines if AR camera is needed
+    // 37.33283141 -122.0312186
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let userCoordinate = manager.location?.coordinate {
             var augmentedRealityReady = false

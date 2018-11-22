@@ -2,11 +2,7 @@
 //  GhostListViewController.swift
 //  Ghost Hunt
 //
-<<<<<<< HEAD
 //  Created by Zachary Broeg on 11/21/18.
-=======
-//  Created by Andrew Palmer on 11/21/18.
->>>>>>> 217857fa78d0a6977e0d19ff03354fde08809383
 //  Copyright © 2018 Andrew Palmer. All rights reserved.
 //
 
@@ -42,11 +38,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 76
     }
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 217857fa78d0a6977e0d19ff03354fde08809383
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -81,11 +73,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
     }
-<<<<<<< HEAD
     
-=======
-
->>>>>>> 217857fa78d0a6977e0d19ff03354fde08809383
 }
 
 class GhostCell : UITableViewCell {

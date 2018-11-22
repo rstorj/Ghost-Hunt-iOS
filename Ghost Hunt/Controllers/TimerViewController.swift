@@ -14,6 +14,7 @@ class TimerViewController: UIViewController {
         
     let timerLabel: UILabel = {
         let label = UILabel()
+        label.text = "Time Remaining: 1 hour, 30 minutes"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 32)
         return label
@@ -37,6 +38,7 @@ class TimerViewController: UIViewController {
     }
     
     func startUpdateTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
             let formatter = DateComponentsFormatter()
             formatter.allowedUnits = [.hour, .minute, .second]
             formatter.unitsStyle = .full

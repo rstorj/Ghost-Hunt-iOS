@@ -13,11 +13,6 @@
 		980A617821A666080020543F /* round_camera_alt_black_36pt_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A617521A666080020543F /* round_camera_alt_black_36pt_1x.png */; };
 		980A617921A666080020543F /* round_camera_alt_black_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A617621A666080020543F /* round_camera_alt_black_36pt_3x.png */; };
 		980A617A21A666080020543F /* round_camera_alt_black_36pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A617721A666080020543F /* round_camera_alt_black_36pt_2x.png */; };
-		980A617C21A666AC0020543F /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A617B21A666AC0020543F /* GameOverViewController.swift */; };
-		980A617E21A666D50020543F /* GhostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980A617D21A666D50020543F /* GhostListViewController.swift */; };
-		980A618221A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A617F21A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_1x.png */; };
-		980A618321A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A618021A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_2x.png */; };
-		980A618421A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A618121A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_3x.png */; };
 		981A0E8F21A61F5E00225504 /* round_add_circle_black_36pt_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E7D21A61F5C00225504 /* round_add_circle_black_36pt_1x.png */; };
 		981A0E9021A61F5E00225504 /* round_add_circle_black_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E7E21A61F5C00225504 /* round_add_circle_black_36pt_3x.png */; };
 		981A0E9121A61F5E00225504 /* round_view_list_black_36pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E7F21A61F5C00225504 /* round_view_list_black_36pt_2x.png */; };
@@ -49,11 +44,6 @@
 		980A617521A666080020543F /* round_camera_alt_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_1x.png; sourceTree = "<group>"; };
 		980A617621A666080020543F /* round_camera_alt_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_3x.png; sourceTree = "<group>"; };
 		980A617721A666080020543F /* round_camera_alt_black_36pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_2x.png; sourceTree = "<group>"; };
-		980A617B21A666AC0020543F /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
-		980A617D21A666D50020543F /* GhostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostListViewController.swift; sourceTree = "<group>"; };
-		980A617F21A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_arrow_drop_down_circle_black_36pt_1x.png; sourceTree = "<group>"; };
-		980A618021A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_arrow_drop_down_circle_black_36pt_2x.png; sourceTree = "<group>"; };
-		980A618121A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_arrow_drop_down_circle_black_36pt_3x.png; sourceTree = "<group>"; };
 		981A0E5021A61C2400225504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		981A0E7D21A61F5C00225504 /* round_add_circle_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_add_circle_black_36pt_1x.png; sourceTree = "<group>"; };
 		981A0E7E21A61F5C00225504 /* round_add_circle_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_add_circle_black_36pt_3x.png; sourceTree = "<group>"; };
@@ -111,9 +101,6 @@
 				980A617621A666080020543F /* round_camera_alt_black_36pt_3x.png */,
 				981A0E8321A61F5C00225504 /* round_add_circle_black_36pt_2x.png */,
 				981A0E8E21A61F5E00225504 /* round_directions_run_black_36pt_1x.png */,
-				980A617F21A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_1x.png */,
-				980A618021A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_2x.png */,
-				980A618121A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_3x.png */,
 				981A0E8B21A61F5D00225504 /* round_directions_run_black_36pt_2x.png */,
 				981A0E8121A61F5C00225504 /* round_directions_run_black_36pt_3x.png */,
 				981A0E8421A61F5D00225504 /* round_sentiment_very_dissatisfied_black_36pt_1x.png */,
@@ -144,13 +131,8 @@
 			children = (
 				98B87DC7219F5D2F008D5E9B /* MapViewController.swift */,
 				987E005B21A5341A002B3156 /* TimerViewController.swift */,
-<<<<<<< HEAD
 				7D82279121A671E900D084ED /* ARSceneViewController.swift */,
 				7D8227B621A687F300D084ED /* GhostListViewController.swift */,
-=======
-				980A617B21A666AC0020543F /* GameOverViewController.swift */,
-				980A617D21A666D50020543F /* GhostListViewController.swift */,
->>>>>>> 217857fa78d0a6977e0d19ff03354fde08809383
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -254,7 +236,6 @@
 				981A0E9D21A61F5E00225504 /* round_directions_run_black_36pt_2x.png in Resources */,
 				981A0E9521A61F5E00225504 /* round_add_circle_black_36pt_2x.png in Resources */,
 				981A0E9621A61F5E00225504 /* round_sentiment_very_dissatisfied_black_36pt_1x.png in Resources */,
-				980A618421A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_3x.png in Resources */,
 				981A0EA021A61F5E00225504 /* round_directions_run_black_36pt_1x.png in Resources */,
 				98B87DD0219F5D30008D5E9B /* LaunchScreen.storyboard in Resources */,
 				981A0E9E21A61F5E00225504 /* round_timer_black_36pt_1x.png in Resources */,
@@ -262,7 +243,6 @@
 				980A617821A666080020543F /* round_camera_alt_black_36pt_1x.png in Resources */,
 				981A0E9F21A61F5E00225504 /* round_sentiment_very_dissatisfied_black_36pt_3x.png in Resources */,
 				981A0E9721A61F5E00225504 /* round_sentiment_very_dissatisfied_black_36pt_2x.png in Resources */,
-				980A618321A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_2x.png in Resources */,
 				981A0E9221A61F5E00225504 /* round_timer_black_36pt_3x.png in Resources */,
 				981A0E9021A61F5E00225504 /* round_add_circle_black_36pt_3x.png in Resources */,
 				981A0E9921A61F5E00225504 /* round_view_list_black_36pt_3x.png in Resources */,
@@ -270,7 +250,6 @@
 				980A617A21A666080020543F /* round_camera_alt_black_36pt_2x.png in Resources */,
 				981A0E8F21A61F5E00225504 /* round_add_circle_black_36pt_1x.png in Resources */,
 				981A0E9B21A61F5E00225504 /* round_view_list_black_36pt_1x.png in Resources */,
-				980A618221A66D9A0020543F /* round_arrow_drop_down_circle_black_36pt_1x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,18 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				7D8227B721A687F300D084ED /* GhostListViewController.swift in Sources */,
 				7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */,
 				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
 				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
 				7D8227B521A6858600D084ED /* GhostModel.swift in Sources */,
-=======
-				980A617E21A666D50020543F /* GhostListViewController.swift in Sources */,
-				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
-				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
-				980A617C21A666AC0020543F /* GameOverViewController.swift in Sources */,
->>>>>>> 217857fa78d0a6977e0d19ff03354fde08809383
 				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
 				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
 				98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */,
