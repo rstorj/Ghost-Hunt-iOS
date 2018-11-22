@@ -12,9 +12,10 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     
-    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png" /*"round_control_point_black_72pt"*/)!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
+    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_timer_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
+    let cameraButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_camera_alt_black_36pt_3x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 43)
     
     let ghostPin1 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 1 Name")   // ghost 1 pin
     let ghostPin2 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 2 Name")   // ghost 2 pin
@@ -37,6 +38,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let coordinate8 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 8 location
     
     var toggled: Bool = false   // ui button toggle
+    var cameraButtonEnabled: Bool = false   // used to determine if ready for an AR situation
     var pinAnnotationView:MKPinAnnotationView!  // used to display custom pins
     var mapView:MKMapView?  // map view
     var locationManager:CLLocationManager?  // used to track user location
@@ -71,17 +73,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // 37.33283141 -122.0312186
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let userCoordinate = manager.location?.coordinate {
+            var augmentedRealityReady = false
             for i in 0...7 {
                 if (customPins[i].coordinate.latitude - userCoordinate.latitude < 0.00001 && customPins[i].coordinate.latitude - userCoordinate.latitude > -0.0001) {
                     if (customPins[i].coordinate.longitude - userCoordinate.longitude < 0.00001 && customPins[i].coordinate.longitude - userCoordinate.longitude > -0.0001) {
-                        print("\(customPins[i].title!) nearby! Lat diff: \(customPins[i].coordinate.latitude - userCoordinate.latitude) Long diff: \(customPins[i].coordinate.longitude - userCoordinate.longitude)")
-                        print("me: \(userCoordinate) ghost: \(customPins[i].coordinate)")
                         customPins[i].subtitle = "Nearby!"
+                        if !augmentedRealityReady {
+                            augmentedRealityReady = true
+                            enableCameraButton()
+                        }
                     } else {
                         customPins[i].subtitle = "(\(customPins[i].coordinate.latitude), \(customPins[i].coordinate.longitude))"
+                        if !augmentedRealityReady && cameraButtonEnabled {
+                            disableCameraButton()
+                        }
                     }
                 }
             }
+            cameraButtonEnabled = augmentedRealityReady
         }
     }
     
@@ -112,35 +121,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let location = locationManager?.location {
             mapView?.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), latitudinalMeters: 200, longitudinalMeters: 200)
             
-            let testCoordinate1 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0005, longitude: location.coordinate.longitude)
+            let testCoordinate1 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0003, longitude: location.coordinate.longitude)
             addCustomPinAtCoordinate(coordinate: testCoordinate1, customPin: ghostPin1)
             ghostPin1.subtitle = "(\(testCoordinate1.latitude), \(testCoordinate1.longitude))"
             
-            let testCoordinate2 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude + 0.0005)
+            let testCoordinate2 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude + 0.0003)
             addCustomPinAtCoordinate(coordinate: testCoordinate2, customPin: ghostPin2)
             ghostPin2.subtitle = "(\(testCoordinate2.latitude), \(testCoordinate2.longitude))"
             
-            let testCoordinate3 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0005, longitude: location.coordinate.longitude + 0.0005)
+            let testCoordinate3 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0003, longitude: location.coordinate.longitude + 0.0003)
             addCustomPinAtCoordinate(coordinate: testCoordinate3, customPin: ghostPin3)
             ghostPin3.subtitle = "(\(testCoordinate3.latitude), \(testCoordinate3.longitude))"
             
-            let testCoordinate4 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0005, longitude: location.coordinate.longitude + 0.0005)
+            let testCoordinate4 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0003, longitude: location.coordinate.longitude + 0.0003)
             addCustomPinAtCoordinate(coordinate: testCoordinate4, customPin: ghostPin4)
             ghostPin4.subtitle = "(\(testCoordinate4.latitude), \(testCoordinate4.longitude))"
             
-            let testCoordinate5 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0005, longitude: location.coordinate.longitude - 0.0005)
+            let testCoordinate5 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0003, longitude: location.coordinate.longitude - 0.0003)
             addCustomPinAtCoordinate(coordinate: testCoordinate5, customPin: ghostPin5)
             ghostPin5.subtitle = "(\(testCoordinate5.latitude), \(testCoordinate5.longitude))"
             
-            let testCoordinate6 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0005, longitude: location.coordinate.longitude - 0.0005)
+            let testCoordinate6 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0003, longitude: location.coordinate.longitude - 0.0003)
             addCustomPinAtCoordinate(coordinate: testCoordinate6, customPin: ghostPin6)
             ghostPin6.subtitle = "(\(testCoordinate6.latitude), \(testCoordinate6.longitude))"
             
-            let testCoordinate7 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0005, longitude: location.coordinate.longitude)
+            let testCoordinate7 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0003, longitude: location.coordinate.longitude)
             addCustomPinAtCoordinate(coordinate: testCoordinate7, customPin: ghostPin7)
             ghostPin7.subtitle = "(\(testCoordinate7.latitude), \(testCoordinate7.longitude))"
             
-            let testCoordinate8 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude - 0.0005)
+            let testCoordinate8 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude - 0.0003)
             addCustomPinAtCoordinate(coordinate: testCoordinate8, customPin: ghostPin8)
             ghostPin8.subtitle = "(\(testCoordinate8.latitude), \(testCoordinate8.longitude))"
             
@@ -175,27 +184,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         view.addSubview(toggleButton)
         addConstraintsWithFormat(format: "H:|-36-[v0(72)]", views: toggleButton)
         addConstraintsWithFormat(format: "V:[v0(72)]-36-|", views: toggleButton)
+        
+        cameraButton.addTarget(self, action: #selector(cameraButtonPressed), for: .touchUpInside)
+        cameraButton.isEnabled = false
+        cameraButton.alpha = 0
+        view.addSubview(cameraButton)
+        let divider = view.frame.size.width/2 - 43
+        addConstraintsWithFormat(format: "H:|-\(divider)-[v0(86)]-\(divider)-|", views: cameraButton)
+        addConstraintsWithFormat(format: "V:[v0(86)]-43-|", views: cameraButton)
     }
     
     // animates buttons up or back down
     @objc func toggleButtonPressed() {
         toggled = !toggled
         if toggled {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.toggleButton.setImage(UIImage(named: "round_arrow_drop_down_circle_black_36pt_2x.png"), for: .normal)
                 
+                self.ghostListButton.isEnabled = true
                 self.ghostListButton.alpha = 1
                 self.ghostListButton.frame = CGRect(x: 36, y: self.view.frame.size.height - 72 * 2.75, width: 72, height: 72)
                 
+                self.timerButton.isEnabled = true
                 self.timerButton.alpha = 1
                 self.timerButton.frame = CGRect(x: 36, y: self.view.frame.size.height - 72 * 4, width: 72, height: 72)
             }) { (success) in
-                self.ghostListButton.isEnabled = true
-                self.timerButton.isEnabled = true
             }
         } else {
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-                self.toggleButton.setImage(UIImage(named: "round_add_circle_black_36pt_2x.png"/*"round_control_point_black_72pt"*/), for: .normal)
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+                self.toggleButton.setImage(UIImage(named: "round_add_circle_black_36pt_2x.png"), for: .normal)
                 
                 self.ghostListButton.isEnabled = false
                 self.ghostListButton.alpha = 0
@@ -209,7 +226,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // pushed ghost list controller onto the navigation controller
+    // animates camera to be enabled
+    func enableCameraButton() {
+        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            self.cameraButton.isEnabled = true
+            self.cameraButton.alpha = 1
+        }) { (success) in
+            print("camera enabled")
+        }
+    }
+    
+    // animates camera to be disabled
+    func disableCameraButton() {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.cameraButton.isEnabled = false
+            self.cameraButton.alpha = 0
+        }) { (success) in
+            print("camera disabled")
+        }
+    }
+    
+    // pushes ghost list controller onto the navigation controller
     @objc func ghostListButtonPressed() {
         self.toggleButtonPressed()
         let vc = TimerViewController()
@@ -225,6 +262,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title = "Map"
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // pushes AR camera onto the navigation controller
+    @objc func cameraButtonPressed() {
+        
     }
     
     // constraint generator takes in format and creates constraints
