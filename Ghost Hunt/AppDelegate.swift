@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setupWindow()
@@ -21,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupWindow() {
+        TimerModel.sharedTimer.startOneSecondTimer {
+            let timeElapsed = TimerModel.sharedTimer.getTimeElapsed()
+            if (timeElapsed >= 5400) {
+                TimerModel.sharedTimer.stopTimer()
+                // TODO: navigate to game over screen
+            }
+            
+        }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         let viewController = MapViewController();

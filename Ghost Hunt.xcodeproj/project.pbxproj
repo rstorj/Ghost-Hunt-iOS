@@ -29,6 +29,7 @@
 		981A0E9E21A61F5E00225504 /* round_timer_black_36pt_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E8C21A61F5D00225504 /* round_timer_black_36pt_1x.png */; };
 		981A0E9F21A61F5E00225504 /* round_sentiment_very_dissatisfied_black_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E8D21A61F5D00225504 /* round_sentiment_very_dissatisfied_black_36pt_3x.png */; };
 		981A0EA021A61F5E00225504 /* round_directions_run_black_36pt_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E8E21A61F5E00225504 /* round_directions_run_black_36pt_1x.png */; };
+		981A0EA221A6375A00225504 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981A0EA121A6375A00225504 /* TimerModel.swift */; };
 		987E005721A4FD0E002B3156 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987E005621A4FD0E002B3156 /* MapKit.framework */; };
 		987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E005B21A5341A002B3156 /* TimerViewController.swift */; };
 		98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */; };
@@ -60,6 +61,7 @@
 		981A0E8C21A61F5D00225504 /* round_timer_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_timer_black_36pt_1x.png; sourceTree = "<group>"; };
 		981A0E8D21A61F5D00225504 /* round_sentiment_very_dissatisfied_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_sentiment_very_dissatisfied_black_36pt_3x.png; sourceTree = "<group>"; };
 		981A0E8E21A61F5E00225504 /* round_directions_run_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_directions_run_black_36pt_1x.png; sourceTree = "<group>"; };
+		981A0EA121A6375A00225504 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		987E005621A4FD0E002B3156 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		987E005B21A5341A002B3156 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				981A0E5021A61C2400225504 /* Assets.xcassets */,
 				98B87DCE219F5D30008D5E9B /* LaunchScreen.storyboard */,
 				98B87DD1219F5D30008D5E9B /* Info.plist */,
+				981A0EA121A6375A00225504 /* TimerModel.swift */,
 			);
 			path = "Ghost Hunt";
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
 				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
+				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
 				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
 				98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */,
 			);

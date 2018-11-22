@@ -10,8 +10,7 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    
-    
+        
     let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_timer_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
@@ -228,7 +227,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // animates camera to be enabled
     func enableCameraButton() {
-        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.cameraButton.isEnabled = true
             self.cameraButton.alpha = 1
         }) { (success) in
@@ -238,7 +237,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // animates camera to be disabled
     func disableCameraButton() {
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
             self.cameraButton.isEnabled = false
             self.cameraButton.alpha = 0
         }) { (success) in
