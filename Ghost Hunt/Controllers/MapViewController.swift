@@ -69,7 +69,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager?.startUpdatingLocation()
     }
     
-    // 37.33283141 -122.0312186
+    // tracks user location and determines if AR camera is needed
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let userCoordinate = manager.location?.coordinate {
             var augmentedRealityReady = false
@@ -248,7 +248,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // pushes ghost list controller onto the navigation controller
     @objc func ghostListButtonPressed() {
         self.toggleButtonPressed()
-        let vc = TimerViewController()
+        let vc = GhostListViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title = "Map"
         self.navigationController?.pushViewController(vc, animated: true)
