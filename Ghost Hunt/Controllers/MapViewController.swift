@@ -27,6 +27,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var customPins: [CustomPointAnnotation]!
     
+     let ghostOne = GhostModel(name: "ghost1", locked: false)
+     let ghostTwo = GhostModel(name: "ghost2", locked: false)
+     let ghostThree = GhostModel(name: "ghost3", locked: false)
+    let ghostFour = GhostModel(name: "ghost4", locked: false)
+    let ghostFive = GhostModel(name: "ghost5", locked: false)
+    let ghostSix = GhostModel(name: "ghost6", locked: false)
+    let ghostSeven = GhostModel(name: "ghost7", locked: false)
+    let ghostEight = GhostModel(name: "ghost8", locked: false)
+    
+    var ghostObjects: [GhostModel]!
+    
     let coordinate1 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 1 location
     let coordinate2 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 2 location
     let coordinate3 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 3 location
@@ -46,6 +57,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         customPins = [ghostPin1, ghostPin2, ghostPin3, ghostPin4, ghostPin5, ghostPin6, ghostPin7, ghostPin8]
+        ghostObjects = [ghostOne,ghostTwo, ghostThree, ghostFour, ghostFive, ghostSix,ghostSeven, ghostEight ] as? [GhostModel]
         setupNavigationBar()
         requestLocation()
         //setupMap()    // TODO: comment this out for use at State Pen
@@ -123,6 +135,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let testCoordinate1 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0003, longitude: location.coordinate.longitude)
             addCustomPinAtCoordinate(coordinate: testCoordinate1, customPin: ghostPin1)
             ghostPin1.subtitle = "(\(testCoordinate1.latitude), \(testCoordinate1.longitude))"
+           
             
             let testCoordinate2 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude + 0.0003)
             addCustomPinAtCoordinate(coordinate: testCoordinate2, customPin: ghostPin2)
@@ -248,9 +261,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // pushes ghost list controller onto the navigation controller
     @objc func ghostListButtonPressed() {
         self.toggleButtonPressed()
-        let vc = TimerViewController()
+        let vc = GhostListViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.green
-        navigationItem.title = "Map"
+        navigationItem.title = "GHosts"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -265,7 +278,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // pushes AR camera onto the navigation controller
     @objc func cameraButtonPressed() {
-        
+        self.toggleButtonPressed()
+        let vc = ARSceneViewController()
+        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationItem.title="Camera"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // constraint generator takes in format and creates constraints

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82279121A671E900D084ED /* ARSceneViewController.swift */; };
+		7D8227B521A6858600D084ED /* GhostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8227B421A6858600D084ED /* GhostModel.swift */; };
+		7D8227B721A687F300D084ED /* GhostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8227B621A687F300D084ED /* GhostListViewController.swift */; };
 		980A617821A666080020543F /* round_camera_alt_black_36pt_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A617521A666080020543F /* round_camera_alt_black_36pt_1x.png */; };
 		980A617921A666080020543F /* round_camera_alt_black_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A617621A666080020543F /* round_camera_alt_black_36pt_3x.png */; };
 		980A617A21A666080020543F /* round_camera_alt_black_36pt_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 980A617721A666080020543F /* round_camera_alt_black_36pt_2x.png */; };
@@ -35,6 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D82279121A671E900D084ED /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
+		7D8227B421A6858600D084ED /* GhostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostModel.swift; sourceTree = "<group>"; };
+		7D8227B621A687F300D084ED /* GhostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostListViewController.swift; sourceTree = "<group>"; };
 		980A617521A666080020543F /* round_camera_alt_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_1x.png; sourceTree = "<group>"; };
 		980A617621A666080020543F /* round_camera_alt_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_3x.png; sourceTree = "<group>"; };
 		980A617721A666080020543F /* round_camera_alt_black_36pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_2x.png; sourceTree = "<group>"; };
@@ -77,6 +83,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D8227B321A6857300D084ED /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */,
+				981A0EA121A6375A00225504 /* TimerModel.swift */,
+				7D8227B421A6858600D084ED /* GhostModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		981A0E5221A61D1300225504 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,16 +131,10 @@
 			children = (
 				98B87DC7219F5D2F008D5E9B /* MapViewController.swift */,
 				987E005B21A5341A002B3156 /* TimerViewController.swift */,
+				7D82279121A671E900D084ED /* ARSceneViewController.swift */,
+				7D8227B621A687F300D084ED /* GhostListViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		98A30A3221A5EFF800660051 /* Custom Classes */ = {
-			isa = PBXGroup;
-			children = (
-				98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */,
-			);
-			path = "Custom Classes";
 			sourceTree = "<group>";
 		};
 		98B87DB9219F5D2F008D5E9B = {
@@ -147,14 +157,13 @@
 		98B87DC4219F5D2F008D5E9B /* Ghost Hunt */ = {
 			isa = PBXGroup;
 			children = (
+				7D8227B321A6857300D084ED /* Models */,
 				981A0E5221A61D1300225504 /* Icons */,
-				98A30A3221A5EFF800660051 /* Custom Classes */,
 				98B87DC5219F5D2F008D5E9B /* AppDelegate.swift */,
 				987E005A21A53376002B3156 /* Controllers */,
 				981A0E5021A61C2400225504 /* Assets.xcassets */,
 				98B87DCE219F5D30008D5E9B /* LaunchScreen.storyboard */,
 				98B87DD1219F5D30008D5E9B /* Info.plist */,
-				981A0EA121A6375A00225504 /* TimerModel.swift */,
 			);
 			path = "Ghost Hunt";
 			sourceTree = "<group>";
@@ -251,8 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D8227B721A687F300D084ED /* GhostListViewController.swift in Sources */,
+				7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */,
 				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
 				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
+				7D8227B521A6858600D084ED /* GhostModel.swift in Sources */,
 				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
 				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
 				98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */,

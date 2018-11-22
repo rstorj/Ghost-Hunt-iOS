@@ -23,13 +23,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Let's you see your location so you can find Ghosts!</string>
+	<string>Let&apos;s you see your location so you can find Ghosts!</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Let's you see your location so you can find Ghosts!</string>
+	<string>Let&apos;s you see your location so you can find Ghosts!</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Allow location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Let's you see your location so you can find Ghosts while using the app!</string>
+	<string>Let&apos;s you see your location so you can find Ghosts while using the app!</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -40,6 +40,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>This App requires the use of the camera </string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
