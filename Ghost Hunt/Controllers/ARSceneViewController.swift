@@ -11,11 +11,11 @@ import ARKit
 
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
-    @IBOutlet var sceneView: ARSCNView!
+    var sceneView: ARSCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        sceneView = ARSCNView(frame: view.frame)
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -23,7 +23,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let scene = SCNScene(named: "art.scnassets/ghost1Scene.scn")!
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -33,10 +33,18 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         super.viewWillAppear(animated)
         
         // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = AROrientationTrackingConfiguration()
+        ARWorldTrackingConfiguration.PlaneDetection.horizontal
+        configuration.isLightEstimationEnabled = true
+        //configuration.planeDetection = .horizontal
         
-        // Run the view's session
-        sceneView.session.run(configuration)
+        if ARConfiguration.isSupported {
+            // Run the view's session
+            print("configuration supported")
+            sceneView.session.run(configuration)
+        } else {
+            print("configuration not supported by device")
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,18 +58,18 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     
      // Override to create and configure nodes for anchors added to the view's session.
-     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+    // func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
        
     
         
-        let ghost1 = SCNNode()
+       /* let ghost1 = SCNNode
         let ghost2 = SCNNode()
         let ghost3 = SCNNode()
         let ghost4 = SCNNode()
         let ghost5 = SCNNode()
         
         var ghostArray : [SCNNode] = [ghost1, ghost2, ghost3, ghost4, ghost5]
-       
+       */
         // TODO: create the logic tree checking NSObject names and returning a corersponding node
         /*
          if( == true) {
@@ -72,8 +80,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
          checks to see which ghost is active
  */
      
-        return ghost1
-     }
+       // return ghost1
+    // }
     
     
     func session(_ session: ARSession, didFailWithError error: Error) {

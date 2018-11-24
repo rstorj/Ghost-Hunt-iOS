@@ -132,7 +132,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let location = locationManager?.location {
             mapView?.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), latitudinalMeters: 200, longitudinalMeters: 200)
             
-            let testCoordinate1 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0003, longitude: location.coordinate.longitude)
+            let testCoordinate1 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             addCustomPinAtCoordinate(coordinate: testCoordinate1, customPin: ghostPin1)
             ghostPin1.subtitle = "(\(testCoordinate1.latitude), \(testCoordinate1.longitude))"
            
