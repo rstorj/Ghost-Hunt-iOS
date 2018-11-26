@@ -29,7 +29,10 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
-        sceneView.showsStatistics = true
+        //sceneView.showsStatistics = true  // for debugging
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:)))  // tap gesture recognizer
+        sceneView.addGestureRecognizer(tapRecognizer)
     }
     
     // configures ar world tracking
@@ -38,7 +41,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         navigationController?.navigationBar.isHidden = false
         
         let configuration = ARWorldTrackingConfiguration()
-        configuration.worldAlignment = .gravity
+        configuration.worldAlignment = .camera
         configuration.planeDetection = .horizontal
         configuration.isLightEstimationEnabled = true
         if ARConfiguration.isSupported {
@@ -49,7 +52,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    
     // Pause the view's session
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -57,80 +59,50 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
     
-    // MARK: - ARSCNViewDelegate
-    
-    
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-        let width = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
-        let plane = SCNPlane(width: width, height: height)
-        plane.materials.first?.diffuse.contents = UIColor.blue
-        
-        let planeNode = SCNNode(geometry: plane)
         let x = CGFloat(planeAnchor.center.x)
         let y = CGFloat(planeAnchor.center.y)
         let z = CGFloat(planeAnchor.center.z)
-        planeNode.position = SCNVector3(x,y,z)
-        planeNode.eulerAngles.x = -.pi / 2
-        node.addChildNode(planeNode)
         
         if (ghostNode == nil) {
             guard let ghostScene = SCNScene(named: "art.scnassets/snowden.scn"),
-                let ghostNode = ghostScene.rootNode.childNode(withName: "snowden", recursively: true)
+                let ghost = ghostScene.rootNode.childNode(withName: "snowden", recursively: true)
                 else { return }
+            ghost.position = SCNVector3(x,y,z)
+            self.ghostNode = ghost
+            node.addChildNode(ghost)
             
-            self.ghostNode = ghostNode
-            self.ghostNode?.position = SCNVector3(x,y,z)
-            //planeNode.addChildNode(self.ghostNode!)
-            sceneView.scene.rootNode.addChildNode(self.ghostNode!)
+            // Example of 3d text object
+            /*let text:SCNText = SCNText(string: "Snowden", extrusionDepth: CGFloat(1))
+
+            let material:SCNMaterial = SCNMaterial()
+            material.diffuse.contents = UIColor.green
+            text.materials = [material]
             
-            enableCameraButton()
+            let textNode = SCNNode()
+            textNode.position = SCNVector3(x,y+0.5,z)
+            textNode.scale = SCNVector3(0.01, 0.01, 0.01)
+            textNode.geometry = text
+            
+            node.addChildNode(textNode)*/
+            
+            
         }
     }
     
-    func enableCameraButton() {
-        print("camera button enabled. ready to capture ghost!")
+    @objc func handleTap(tap: UITapGestureRecognizer){
+        
+        if tap.state == .ended {
+            let location: CGPoint = tap.location(in: sceneView)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if !hits.isEmpty{
+                let tappedNode = hits.first?.node
+                print("tapped on: \(String(describing: tappedNode?.name))")
+            }
+        }
     }
-    
-    // Override to update and configure nodes for anchors in the view's session
-    /*func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as?  ARPlaneAnchor,
-            let planeNode = node.childNodes.first,
-            let plane = planeNode.geometry as? SCNPlane
-            else { return }
-        
-        let width = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
-        plane.width = width
-        plane.height = height
-        
-        let x = CGFloat(planeAnchor.center.x)
-        let y = CGFloat(planeAnchor.center.y)
-        let z = CGFloat(planeAnchor.center.z)
-        planeNode.position = SCNVector3(x, y, z)
-    }*/
-    
-    /*// Adds ghost model to scene with tap
-    @objc func addGhostToSceneView(withGestureRecognizer recognizer: UIGestureRecognizer) {
-        let tapLocation = recognizer.location(in: sceneView)
-        let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
-        
-        guard let hitTestResult = hitTestResults.first else { return }
-        let translation = hitTestResult.worldTransform.translation
-        let x = translation.x
-        let y = translation.y
-        let z = translation.z
-        
-        guard let shipScene = SCNScene(named: "ship.scn"),
-            let shipNode = shipScene.rootNode.childNode(withName: "ship", recursively: false)
-            else { return }
-        
-        
-        shipNode.position = SCNVector3(x,y,z)
-        sceneView.scene.rootNode.addChildNode(shipNode)
-    }*/
     
     // Present an error message to the user
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -147,5 +119,25 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         
     }
+    
+    func takeScreenshot() {
+        DispatchQueue.main.async {
+            let flashOverlay = UIView(frame: self.sceneView.frame)
+            flashOverlay.backgroundColor = UIColor.white
+            self.sceneView.addSubview(flashOverlay)
+            UIView.animate(withDuration: 0.5, animations: {
+                flashOverlay.alpha = 0.0
+            }, completion: { _ in
+                flashOverlay.removeFromSuperview()
+                UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
+            })
+        }
+        AudioServicesPlayAlertSound(1108)
+    }
 }
 
+extension UIColor {
+    open class var transparentLightBlue: UIColor {
+        return UIColor(red: 90/255, green: 200/255, blue: 250/255, alpha: 0.50)
+    }
+}

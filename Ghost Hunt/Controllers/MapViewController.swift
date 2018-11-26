@@ -203,7 +203,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         view.addSubview(cameraButton)
         let divider = view.frame.size.width/2 - 43
         addConstraintsWithFormat(format: "H:|-\(divider)-[v0(86)]-\(divider)-|", views: cameraButton)
-        addConstraintsWithFormat(format: "V:[v0(86)]-43-|", views: cameraButton)
+        addConstraintsWithFormat(format: "V:[v0(86)]-29-|", views: cameraButton)
     }
     
     // animates buttons up or back down
