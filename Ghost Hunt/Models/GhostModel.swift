@@ -10,8 +10,8 @@ import Foundation
 
 class GhostModel : NSObject
 {
-    var name: String = ""
-    var locked :Bool = false
+    var name:String = ""
+    var locked:Bool = false
     
     
     init?(name: String, locked: Bool) {

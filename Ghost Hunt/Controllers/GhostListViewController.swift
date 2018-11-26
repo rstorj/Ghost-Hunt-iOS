@@ -17,6 +17,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     let ghostTableView: UITableView = {
         let tableView = UITableView()
         tableView.isSpringLoaded = true
+        tableView.backgroundColor = UIColor.gray
         tableView.bounces = true
         tableView.isScrollEnabled = true
         return tableView
@@ -28,6 +29,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! GhostCell
+        cell.backgroundColor = UIColor.gray
         cell.textLabel?.text = ghostNames[indexPath.row]
         cell.detailTextLabel?.text = ghostYear[indexPath.row]
         cell.statusLabel.text = ghostStatus[indexPath.row]

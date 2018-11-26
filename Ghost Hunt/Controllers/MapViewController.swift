@@ -263,7 +263,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.toggleButtonPressed()
         let vc = GhostListViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.green
-        navigationItem.title = "Ghosts"
+        navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -272,16 +272,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.toggleButtonPressed()
         let vc = TimerViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.green
-        navigationItem.title = "Map"
+        navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // pushes AR camera onto the navigation controller
     @objc func cameraButtonPressed() {
-        self.toggleButtonPressed()
         let vc = ARSceneViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.green
-        navigationItem.title="Camera"
+        navigationItem.title="Map"  // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
