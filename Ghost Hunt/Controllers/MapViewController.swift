@@ -263,7 +263,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.toggleButtonPressed()
         let vc = GhostListViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.green
-        navigationItem.title = "GHosts"
+        navigationItem.title = "Ghosts"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

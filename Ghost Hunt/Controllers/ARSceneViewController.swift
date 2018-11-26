@@ -12,10 +12,12 @@ import ARKit
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
     var sceneView: ARSCNView!
+    var configuration: ARWorldTrackingConfiguration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView = ARSCNView(frame: view.frame)
+        view = sceneView
         // Set the view's delegate
         sceneView.delegate = self
         
@@ -24,6 +26,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ghost1Scene.scn")!
+        sceneView.frame = view.frame
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -31,13 +34,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         // Create a session configuration
-        let configuration = AROrientationTrackingConfiguration()
-        ARWorldTrackingConfiguration.PlaneDetection.horizontal
-        configuration.isLightEstimationEnabled = true
-        //configuration.planeDetection = .horizontal
-        
+        configuration = ARWorldTrackingConfiguration()
         if ARConfiguration.isSupported {
             // Run the view's session
             print("configuration supported")
@@ -46,6 +44,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             print("configuration not supported by device")
         }
     }
+    
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -83,10 +83,10 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
        // return ghost1
     // }
     
-    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
+        print("Session failed. Changing worldAlignment property.")
+        print(error.localizedDescription)
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
