@@ -15,6 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_timer_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let cameraButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_camera_alt_black_36pt_3x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 43)
+    let imageRecognitionButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_wallpaper_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     
     let ghostPin1 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 1 Name")   // ghost 1 pin
     let ghostPin2 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 2 Name")   // ghost 2 pin
@@ -27,9 +28,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var customPins: [CustomPointAnnotation]!
     
-     let ghostOne = GhostModel(name: "ghost1", locked: false)
-     let ghostTwo = GhostModel(name: "ghost2", locked: false)
-     let ghostThree = GhostModel(name: "ghost3", locked: false)
+    let ghostOne = GhostModel(name: "ghost1", locked: false)
+    let ghostTwo = GhostModel(name: "ghost2", locked: false)
+    let ghostThree = GhostModel(name: "ghost3", locked: false)
     let ghostFour = GhostModel(name: "ghost4", locked: false)
     let ghostFive = GhostModel(name: "ghost5", locked: false)
     let ghostSix = GhostModel(name: "ghost6", locked: false)
@@ -204,6 +205,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let divider = view.frame.size.width/2 - 43
         addConstraintsWithFormat(format: "H:|-\(divider)-[v0(86)]-\(divider)-|", views: cameraButton)
         addConstraintsWithFormat(format: "V:[v0(86)]-29-|", views: cameraButton)
+        
+        imageRecognitionButton.addTarget(self, action: #selector(imageRecognitionButtonPressed), for: .touchUpInside)
+        view.addSubview(imageRecognitionButton)
+        addConstraintsWithFormat(format: "H:|-36-[v0(72)]|", views: imageRecognitionButton)
+        addConstraintsWithFormat(format: "V:[v0(72)]-36-|", views: imageRecognitionButton)
+        imageRecognitionButton.isEnabled = false
+        imageRecognitionButton.alpha = 0
     }
     
     // animates buttons up or back down
@@ -220,6 +228,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.timerButton.isEnabled = true
                 self.timerButton.alpha = 1
                 self.timerButton.frame = CGRect(x: 36, y: self.view.frame.size.height - 72 * 4, width: 72, height: 72)
+                
+                self.imageRecognitionButton.isEnabled = true
+                self.imageRecognitionButton.alpha = 1
+                self.imageRecognitionButton.frame = CGRect(x: 36, y: self.view.frame.size.height - 72 * 5.25, width: 72, height: 72)
             }) { (success) in
             }
         } else {
@@ -233,6 +245,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.timerButton.isEnabled = false
                 self.timerButton.alpha = 0
                 self.timerButton.frame = CGRect(x: 36, y: self.view.frame.size.height - 108, width: 72, height: 72)
+                
+                self.imageRecognitionButton.isEnabled = false
+                self.imageRecognitionButton.alpha = 0
+                self.imageRecognitionButton.frame = CGRect(x: 36, y: self.view.frame.size.height - 108, width: 72, height: 72)
             }) { (success) in
             }
         }
@@ -240,7 +256,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // animates camera to be enabled
     func enableCameraButton() {
-        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.cameraButton.isEnabled = true
             self.cameraButton.alpha = 1
         }) { (success) in
@@ -281,6 +297,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let vc = ARSceneViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title="Map"  // sets back button text for pushed vc
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // pushed image recognition ar view controller onto the navigation controller
+    @objc func imageRecognitionButtonPressed() {
+        self.toggleButtonPressed()
+        let vc = ImageRecognitionViewController()
+        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
