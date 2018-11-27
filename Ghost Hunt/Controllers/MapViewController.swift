@@ -28,16 +28,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var customPins: [CustomPointAnnotation]!
     
-    let ghostOne = GhostModel(name: "ghost1", locked: false)
-    let ghostTwo = GhostModel(name: "ghost2", locked: false)
-    let ghostThree = GhostModel(name: "ghost3", locked: false)
-    let ghostFour = GhostModel(name: "ghost4", locked: false)
-    let ghostFive = GhostModel(name: "ghost5", locked: false)
-    let ghostSix = GhostModel(name: "ghost6", locked: false)
-    let ghostSeven = GhostModel(name: "ghost7", locked: false)
-    let ghostEight = GhostModel(name: "ghost8", locked: false)
+    let ghostOne = GhostModel(fileName: "snowden.scn", ghostName: "Snowden", ghostYear: "1900", locked: true)
+    let ghostTwo = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostThree = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostFour = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostFive = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostSix = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostSeven = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostEight = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     
-    var ghostObjects: [GhostModel]!
+    //var currentGhost: GhostModel?
+    var ghostIndex: Int!
+    public var ghostObjects: [GhostModel]!
     
     let coordinate1 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 1 location
     let coordinate2 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 2 location
@@ -57,13 +59,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        customPins = [ghostPin1, ghostPin2, ghostPin3, ghostPin4, ghostPin5, ghostPin6, ghostPin7, ghostPin8]
-        ghostObjects = [ghostOne,ghostTwo, ghostThree, ghostFour, ghostFive, ghostSix,ghostSeven, ghostEight ] as? [GhostModel]
+        setupVariables()
         setupNavigationBar()
         requestLocation()
         //setupMap()    // TODO: comment this out for use at State Pen
         setupMapForTesting() // TODO: comment this out when local testing is complete
         addButtons()
+    }
+    
+    func setupVariables() {
+        customPins = [ghostPin1, ghostPin2, ghostPin3, ghostPin4, ghostPin5, ghostPin6, ghostPin7, ghostPin8]
+        ghostObjects = [ghostOne,ghostTwo, ghostThree, ghostFour, ghostFive, ghostSix,ghostSeven, ghostEight ] as? [GhostModel]
     }
     
     // general setup of navigation bar, starts hidden
@@ -92,12 +98,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         customPins[i].subtitle = "Nearby!"
                         if !augmentedRealityReady {
                             augmentedRealityReady = true
+                            ghostIndex = i
                             enableCameraButton()
                         }
                     } else {
                         customPins[i].subtitle = "(\(customPins[i].coordinate.latitude), \(customPins[i].coordinate.longitude))"
                         if !augmentedRealityReady && cameraButtonEnabled {
                             disableCameraButton()
+                            ghostIndex = nil
                         }
                     }
                 }
@@ -278,6 +286,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @objc func ghostListButtonPressed() {
         self.toggleButtonPressed()
         let vc = GhostListViewController()
+        vc.ghostModels = self.ghostObjects
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
@@ -295,6 +304,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // pushes AR camera onto the navigation controller
     @objc func cameraButtonPressed() {
         let vc = ARSceneViewController()
+        vc.ghostIndex = ghostIndex
+        vc.mapVC = self
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title="Map"  // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
@@ -364,7 +375,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // returns custom point annotation
     public static func generateCustomPointAnnotationWithTitle(title: String) -> CustomPointAnnotation {
         let customPointAnnotation = CustomPointAnnotation()
-        customPointAnnotation.pinImage = "round_sentiment_very_dissatisfied_black_36pt_2x.png"
+        customPointAnnotation.pinImage = "round_sentiment_very_dissatisfied_black_36pt_1x.png"
         customPointAnnotation.title = title
         customPointAnnotation.subtitle = "Wandering the area..."
         return customPointAnnotation

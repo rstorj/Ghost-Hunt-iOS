@@ -10,9 +10,7 @@ import UIKit
 
 class GhostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private let ghostNames:[String] = ["Ghost Name 1", "Ghost Name 2", "Ghost Name 3", "Ghost Name 4", "Ghost Name 5", "Ghost Name 6", "Ghost Name 7", "Ghost Name 8", "Ghost Name 1", "Ghost Name 2", "Ghost Name 3", "Ghost Name 4", "Ghost Name 5", "Ghost Name 6", "Ghost Name 7", "Ghost Name 8"]
-    private let ghostStatus:[String] = ["Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered", "Undiscovered"]
-    private let ghostYear:[String] = ["1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887", "1887"]
+    public var ghostModels:[GhostModel]!
     
     let ghostTableView: UITableView = {
         let tableView = UITableView()
@@ -24,15 +22,21 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     }()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ghostNames.count
+        return ghostModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! GhostCell
         cell.backgroundColor = UIColor.gray
-        cell.textLabel?.text = ghostNames[indexPath.row]
-        cell.detailTextLabel?.text = ghostYear[indexPath.row]
-        cell.statusLabel.text = ghostStatus[indexPath.row]
+        cell.textLabel?.text = ghostModels[indexPath.row].ghostName
+        cell.detailTextLabel?.text = ghostModels[indexPath.row].ghostYear
+        if (ghostModels[indexPath.row].locked) {
+            cell.statusLabel.text = "Undiscovered"
+            cell.isUserInteractionEnabled = false
+        } else {
+            cell.statusLabel.text = "Captured!"
+            cell.isUserInteractionEnabled = true
+        }
         cell.profileImageView.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png") // TODO: find images for prisoners
         return cell
     }
@@ -53,7 +57,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         ghostTableView.register(GhostCell.self, forCellReuseIdentifier: "cellId")
         ghostTableView.delegate = self
         ghostTableView.dataSource = self
-        ghostTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height /*- 76*/)
+        ghostTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         view.addSubview(ghostTableView)
     }
     
@@ -96,6 +100,7 @@ class GhostCell : UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.blue
         label.text = ""
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -119,7 +124,7 @@ class GhostCell : UITableViewCell {
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         statusLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        statusLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.frame.width*2 + 12).isActive = true
+        statusLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.frame.width).isActive = true
         statusLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
         statusLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
     }

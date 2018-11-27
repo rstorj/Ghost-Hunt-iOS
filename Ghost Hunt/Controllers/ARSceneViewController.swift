@@ -13,6 +13,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
     var sceneView: ARSCNView!   // ar scene view
     var ghostNode: SCNNode?    // ghost node in scene
+    public var ghostIndex: Int!  // index of ghost in array
+    public var mapVC: MapViewController!    // view controller to update ghost variables
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,13 +69,13 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         let z = CGFloat(planeAnchor.center.z)
         
         if (ghostNode == nil) {
-            guard let ghostScene = SCNScene(named: "art.scnassets/snowden.scn"),
-                let ghost = ghostScene.rootNode.childNode(withName: "snowden", recursively: true)
+            guard let ghostScene = SCNScene(named: "art.scnassets/\(self.mapVC.ghostObjects[self.ghostIndex].fileName)"),
+                let ghost = ghostScene.rootNode.childNode(withName: "ghost", recursively: true)
                 else { return }
             ghost.position = SCNVector3(x,y,z)
             self.ghostNode = ghost
             node.addChildNode(ghost)
-            
+            self.mapVC.ghostObjects[ghostIndex].locked = false
             // Example of 3d text object
             /*let text:SCNText = SCNText(string: "Snowden", extrusionDepth: CGFloat(1))
 
@@ -93,7 +95,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func handleTap(tap: UITapGestureRecognizer){
-        
         if tap.state == .ended {
             let location: CGPoint = tap.location(in: sceneView)
             let hits = self.sceneView.hitTest(location, options: nil)
