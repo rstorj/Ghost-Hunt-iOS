@@ -28,8 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var customPins: [CustomPointAnnotation]!
     
-    let ghostOne = GhostModel(fileName: "snowden.scn", ghostName: "Snowden", ghostYear: "1900", locked: true)
-    let ghostTwo = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostOne = GhostModel(fileName: "vanvlack.scn", ghostName: "Van Vlack", ghostYear: "1900", locked: true)
+    let ghostTwo = GhostModel(fileName: "snowden.scn", ghostName: "Snowden", ghostYear: "1905", locked: true)
     let ghostThree = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostFour = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostFive = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
@@ -111,6 +111,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
             }
             cameraButtonEnabled = augmentedRealityReady
+            ghostPin1.subtitle = "\(userCoordinate)"
         }
     }
     
