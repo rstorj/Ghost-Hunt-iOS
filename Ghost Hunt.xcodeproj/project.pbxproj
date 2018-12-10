@@ -225,6 +225,9 @@
 					98B87DC1219F5D2F008D5E9B = {
 						CreatedOnToolsVersion = 10.0;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};

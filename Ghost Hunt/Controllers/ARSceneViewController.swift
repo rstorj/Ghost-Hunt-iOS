@@ -8,11 +8,15 @@
 
 import UIKit
 import ARKit
+import SceneKit
 
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
     var sceneView: ARSCNView!   // ar scene view
     var ghostNode: SCNNode?    // ghost node in scene
+    var button: SCNNode?    // ar button
+    var uiMarker: SCNNode?   // ar ui marker
+    var name: SCNNode?      // ar ui name
     public var ghostIndex: Int!  // index of ghost in array
     public var mapVC: MapViewController!    // view controller to update ghost variables
     
@@ -72,25 +76,21 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             guard let ghostScene = SCNScene(named: "art.scnassets/\(self.mapVC.ghostObjects[self.ghostIndex].fileName)"),
                 let ghost = ghostScene.rootNode.childNode(withName: "ghost", recursively: true)
                 else { return }
+            uiMarker = ghost.childNode(withName: "ui marker", recursively: true)
+            button = uiMarker!.childNode(withName: "button", recursively: true)
+            let billboardConstraint = SCNBillboardConstraint()
+            uiMarker?.constraints = [billboardConstraint]
+            name = uiMarker?.childNode(withName: "name", recursively: true)
+            if !self.mapVC.ghostObjects[ghostIndex].locked {
+                button?.isHidden = true
+                name?.isHidden = false
+            } else {
+                name?.isHidden = true
+                button?.isHidden = false
+            }
             ghost.position = SCNVector3(x,y,z)
             self.ghostNode = ghost
             node.addChildNode(ghost)
-            self.mapVC.ghostObjects[ghostIndex].locked = false
-            // Example of 3d text object
-            /*let text:SCNText = SCNText(string: "Snowden", extrusionDepth: CGFloat(1))
-
-            let material:SCNMaterial = SCNMaterial()
-            material.diffuse.contents = UIColor.green
-            text.materials = [material]
-            
-            let textNode = SCNNode()
-            textNode.position = SCNVector3(x,y+0.5,z)
-            textNode.scale = SCNVector3(0.01, 0.01, 0.01)
-            textNode.geometry = text
-            
-            node.addChildNode(textNode)*/
-            
-            
         }
     }
     
@@ -100,7 +100,22 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             let hits = self.sceneView.hitTest(location, options: nil)
             if !hits.isEmpty{
                 let tappedNode = hits.first?.node
-                print("tapped on: \(String(describing: tappedNode?.name))")
+                if (tappedNode?.name == "button") {
+                    uiMarker?.isHidden = true
+                    button?.isHidden = true
+                    takeScreenshot()
+                } else {
+                    if let parentNode = tappedNode?.parent {
+                        if (parentNode.name == "button") {
+                            uiMarker?.isHidden = true
+                            button?.isHidden = true
+                            takeScreenshot()
+                        } else {
+                            uiMarker?.isHidden.toggle()
+                        }
+                    }
+                }
+                
             }
         }
     }
@@ -130,7 +145,12 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
                 flashOverlay.alpha = 0.0
             }, completion: { _ in
                 flashOverlay.removeFromSuperview()
-                UIImageWriteToSavedPhotosAlbum(self.sceneView.snapshot(), nil, nil, nil)
+                let image = self.sceneView.snapshot()
+                self.mapVC.ghostObjects[self.ghostIndex].image = image
+                self.mapVC.ghostObjects[self.ghostIndex].locked = false
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                self.uiMarker?.isHidden = false
+                self.name?.isHidden = false
             })
         }
         AudioServicesPlayAlertSound(1108)

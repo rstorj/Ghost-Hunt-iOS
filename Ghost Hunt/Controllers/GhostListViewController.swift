@@ -35,6 +35,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.isUserInteractionEnabled = false
         } else {
             cell.statusLabel.text = "Captured!"
+            cell.profileImageView.image = ghostModels[indexPath.row].image!
             cell.isUserInteractionEnabled = true
         }
         cell.profileImageView.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png") // TODO: find images for prisoners
@@ -115,7 +116,6 @@ class GhostCell : UITableViewCell {
         
         addSubview(profileImageView)
         addSubview(statusLabel)
-        
         
         //constraint anchors, x y width height
         profileImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true

@@ -28,8 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var customPins: [CustomPointAnnotation]!
     
-    let ghostOne = GhostModel(fileName: "vanvlack.scn", ghostName: "Van Vlack", ghostYear: "1900", locked: true)
-    let ghostTwo = GhostModel(fileName: "snowden.scn", ghostName: "Snowden", ghostYear: "1905", locked: true)
+    let ghostOne = GhostModel(fileName: "snowden.scn", ghostName: "Snowden", ghostYear: "1905", locked: true)
+    let ghostTwo = GhostModel(fileName: "vanvlack.scn", ghostName: "Van Vlack", ghostYear: "1900", locked: true)
     let ghostThree = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostFour = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostFive = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
@@ -55,6 +55,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var pinAnnotationView:MKPinAnnotationView!  // used to display custom pins
     var mapView:MKMapView?  // map view
     var locationManager:CLLocationManager?  // used to track user location
+    
+    public var blurView:UIVisualEffectView?   // used to blue the app when in background
     
 
     override func viewDidLoad() {
@@ -102,16 +104,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                             enableCameraButton()
                         }
                     } else {
-                        customPins[i].subtitle = "(\(customPins[i].coordinate.latitude), \(customPins[i].coordinate.longitude))"
                         if !augmentedRealityReady && cameraButtonEnabled {
                             disableCameraButton()
+                            customPins[i].subtitle = "Wandering the area..."
                             ghostIndex = nil
                         }
                     }
                 }
             }
             cameraButtonEnabled = augmentedRealityReady
-            ghostPin1.subtitle = "\(userCoordinate)"
         }
     }
     

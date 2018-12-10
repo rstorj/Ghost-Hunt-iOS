@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class GhostModel : NSObject
 {
@@ -14,7 +15,7 @@ class GhostModel : NSObject
     var ghostName:String = ""
     var ghostYear:String = ""
     var locked:Bool = false
-    
+    var image:UIImage?
     
     init?(fileName: String, ghostName: String, ghostYear: String, locked: Bool) {
         
