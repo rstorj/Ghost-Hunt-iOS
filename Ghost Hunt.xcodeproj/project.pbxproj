@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D31D2C421CCBA7D00E23951 /* SnowdenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */; };
+		7D31D2C621CCC7C700E23951 /* VanVlackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */; };
 		7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82279121A671E900D084ED /* ARSceneViewController.swift */; };
 		7D8227B521A6858600D084ED /* GhostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8227B421A6858600D084ED /* GhostModel.swift */; };
 		7D8227B721A687F300D084ED /* GhostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8227B621A687F300D084ED /* GhostListViewController.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowdenViewController.swift; sourceTree = "<group>"; };
+		7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VanVlackViewController.swift; sourceTree = "<group>"; };
 		7D82279121A671E900D084ED /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
 		7D8227B421A6858600D084ED /* GhostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostModel.swift; sourceTree = "<group>"; };
 		7D8227B621A687F300D084ED /* GhostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostListViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D31D2C721CCC9C100E23951 /* Inmate Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */,
+				7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */,
+			);
+			path = "Inmate Controllers";
+			sourceTree = "<group>";
+		};
 		7D8227B321A6857300D084ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +164,7 @@
 		987E005A21A53376002B3156 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7D31D2C721CCC9C100E23951 /* Inmate Controllers */,
 				98B87DC7219F5D2F008D5E9B /* MapViewController.swift */,
 				987E005B21A5341A002B3156 /* TimerViewController.swift */,
 				7D82279121A671E900D084ED /* ARSceneViewController.swift */,
@@ -299,8 +313,10 @@
 				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
 				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
 				7D8227B521A6858600D084ED /* GhostModel.swift in Sources */,
+				7D31D2C621CCC7C700E23951 /* VanVlackViewController.swift in Sources */,
 				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
 				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
+				7D31D2C421CCBA7D00E23951 /* SnowdenViewController.swift in Sources */,
 				9804470F21ACC4AD0065B5CD /* ImageRecognitionViewController.swift in Sources */,
 				98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */,
 			);
@@ -441,7 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 85ZXRYZ5QH;
+				DEVELOPMENT_TEAM = 9L92D8YMNT;
 				INFOPLIST_FILE = "Ghost Hunt/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -459,7 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 85ZXRYZ5QH;
+				DEVELOPMENT_TEAM = 9L92D8YMNT;
 				INFOPLIST_FILE = "Ghost Hunt/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

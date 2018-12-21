@@ -12,6 +12,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     public var ghostModels:[GhostModel]!
     
+    
     let ghostTableView: UITableView = {
         let tableView = UITableView()
         tableView.isSpringLoaded = true
@@ -38,19 +39,35 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.profileImageView.image = ghostModels[indexPath.row].image!
             cell.isUserInteractionEnabled = true
         }
-        cell.profileImageView.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png") // TODO: find images for prisoners
+        cell.profileImageView.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
+        // TODO: find images for prisoners
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       // logic for checking which index was clicked and then calling to a viewcontroller based on that.
+        // could be better implemented but it works for now.
+        if(indexPath.row == 0) {
+            callSnowden()
+            print("calling Snowden")
+        }
+        if(indexPath.row == 1) {
+            callVanVlack()
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 76
     }
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
+   
     func setupView() {
         view.backgroundColor = UIColor.gray
         navigationController?.navigationBar.isHidden = false
@@ -59,6 +76,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         ghostTableView.delegate = self
         ghostTableView.dataSource = self
         ghostTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
         view.addSubview(ghostTableView)
     }
     
@@ -81,8 +99,27 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
     }
     
+    // MARK:- This is where we are calling out to the inmate ViewControllers
+    @objc func callSnowden() {
+        
+        let vc = SnowdenViewController()
+        self.navigationController?.navigationBar.barTintColor = UIColor.blue
+        navigationItem.title = "Inmate List"    // sets back button text for pushed vc
+        self.navigationController?.pushViewController(vc, animated: true)
+        print("we are in snowden")
+    }
+    
+    @objc func  callVanVlack() {
+        
+        let vc = VanVlackViewController()
+        self.navigationController?.navigationBar.barTintColor = UIColor.blue
+        navigationItem.title = "Inmate List"    // sets back button text for pushed vc
+        self.navigationController?.pushViewController(vc, animated: true)
+        print("we are in VanVlack")
+    }
+    
 }
-
+// MARK: - GhostCell class creation
 class GhostCell : UITableViewCell {
     
     let profileImageView: UIImageView = {
