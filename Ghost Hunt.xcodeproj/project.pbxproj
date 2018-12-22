@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7D31D2C421CCBA7D00E23951 /* SnowdenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */; };
 		7D31D2C621CCC7C700E23951 /* VanVlackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */; };
+		7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */; };
+		7D31D2CB21CD9C5F00E23951 /* WarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */; };
 		7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82279121A671E900D084ED /* ARSceneViewController.swift */; };
 		7D8227B521A6858600D084ED /* GhostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8227B421A6858600D084ED /* GhostModel.swift */; };
 		7D8227B721A687F300D084ED /* GhostListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8227B621A687F300D084ED /* GhostListViewController.swift */; };
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowdenViewController.swift; sourceTree = "<group>"; };
 		7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VanVlackViewController.swift; sourceTree = "<group>"; };
+		7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
+		7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningViewController.swift; sourceTree = "<group>"; };
 		7D82279121A671E900D084ED /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
 		7D8227B421A6858600D084ED /* GhostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostModel.swift; sourceTree = "<group>"; };
 		7D8227B621A687F300D084ED /* GhostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostListViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 				7D82279121A671E900D084ED /* ARSceneViewController.swift */,
 				7D8227B621A687F300D084ED /* GhostListViewController.swift */,
 				9804470E21ACC4AD0065B5CD /* ImageRecognitionViewController.swift */,
+				7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */,
+				7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 				7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */,
 				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
 				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
+				7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */,
 				7D8227B521A6858600D084ED /* GhostModel.swift in Sources */,
 				7D31D2C621CCC7C700E23951 /* VanVlackViewController.swift in Sources */,
 				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
@@ -319,6 +326,7 @@
 				7D31D2C421CCBA7D00E23951 /* SnowdenViewController.swift in Sources */,
 				9804470F21ACC4AD0065B5CD /* ImageRecognitionViewController.swift in Sources */,
 				98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */,
+				7D31D2CB21CD9C5F00E23951 /* WarningViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

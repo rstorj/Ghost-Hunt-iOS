@@ -35,6 +35,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
+        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         //sceneView.showsStatistics = true  // for debugging
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:)))  // tap gesture recognizer
@@ -50,6 +51,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         configuration.worldAlignment = .camera
         configuration.planeDetection = .horizontal
         configuration.isLightEstimationEnabled = true
+        
         if ARConfiguration.isSupported {
             print("configuration supported")
             sceneView.session.run(configuration)

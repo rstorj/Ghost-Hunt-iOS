@@ -36,6 +36,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let ghostSix = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostSeven = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostEight = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostNine = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostTen = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    let ghostEleven = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+   
     
     //var currentGhost: GhostModel?
     var ghostIndex: Int!
