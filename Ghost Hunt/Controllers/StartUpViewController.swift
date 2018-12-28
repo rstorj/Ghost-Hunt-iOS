@@ -18,7 +18,7 @@ class StartUpViewController: UIViewController {
     
     func setupView() {
         self.view.backgroundColor = UIColor.orange
-        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         
         view.addSubview(startButton)

@@ -21,6 +21,7 @@ class ImageRecognitionViewController: UIViewController, ARSCNViewDelegate {
     
     // sets up ar scene view
     func setupView() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Capture Ghost"
         
@@ -50,7 +51,7 @@ class ImageRecognitionViewController: UIViewController, ARSCNViewDelegate {
     // Pause the view's session
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
         sceneView.session.pause()
     }
 

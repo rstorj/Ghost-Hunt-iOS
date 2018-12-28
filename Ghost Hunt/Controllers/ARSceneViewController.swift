@@ -10,6 +10,10 @@ import UIKit
 import ARKit
 import SceneKit
 
+protocol ARGhostNodeDelegate {
+    func getCurrentGhost() -> GhostModel
+}
+
 class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
     var sceneView: ARSCNView!   // ar scene view
@@ -17,8 +21,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     var button: SCNNode?    // ar button
     var uiMarker: SCNNode?   // ar ui marker
     var name: SCNNode?      // ar ui name
-    public var ghostIndex: Int!  // index of ghost in array
-    public var mapVC: MapViewController!    // view controller to update ghost variables
+    var ghostModel: GhostModel!  // current ghost
+    var ghostNodeDelegate: ARGhostNodeDelegate!
+    var delegate: ARGhostNodeDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +32,11 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     // sets up ar scene view
     func setupView() {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Capture Ghost"
         
+        ghostModel = delegate.getCurrentGhost()
         sceneView = ARSCNView(frame: view.frame)
         view = sceneView
         sceneView.delegate = self
@@ -63,7 +70,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     // Pause the view's session
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
         sceneView.session.pause()
     }
     
@@ -75,7 +82,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         let z = CGFloat(planeAnchor.center.z)
         
         if (ghostNode == nil) {
-            guard let ghostScene = SCNScene(named: "art.scnassets/\(self.mapVC.ghostObjects[self.ghostIndex].fileName)"),
+            guard let ghostScene = SCNScene(named: "art.scnassets/\(self.ghostModel.fileName)"),
                 let ghost = ghostScene.rootNode.childNode(withName: "ghost", recursively: true)
                 else { return }
             uiMarker = ghost.childNode(withName: "ui marker", recursively: true)
@@ -83,7 +90,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             let billboardConstraint = SCNBillboardConstraint()
             uiMarker?.constraints = [billboardConstraint]
             name = uiMarker?.childNode(withName: "name", recursively: true)
-            if !self.mapVC.ghostObjects[ghostIndex].locked {
+            if !self.ghostModel.locked {
                 button?.isHidden = true
                 name?.isHidden = false
             } else {
@@ -148,8 +155,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             }, completion: { _ in
                 flashOverlay.removeFromSuperview()
                 let image = self.sceneView.snapshot()
-                self.mapVC.ghostObjects[self.ghostIndex].image = image
-                self.mapVC.ghostObjects[self.ghostIndex].locked = false
+                self.ghostModel.image = image
+                self.ghostModel.locked = false
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                 self.uiMarker?.isHidden = false
                 self.name?.isHidden = false

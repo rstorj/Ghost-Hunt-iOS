@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol GhostModelsDelegate {
+    func getGhostModels() -> [GhostModel]
+}
+
 class GhostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    public var ghostModels:[GhostModel]!
-    
+    var delegate:GhostModelsDelegate!
+    var ghostModels: [GhostModel]!
     
     let ghostTableView: UITableView = {
         let tableView = UITableView()
@@ -69,6 +73,8 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     
    
     func setupView() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        ghostModels = delegate.getGhostModels()
         view.backgroundColor = UIColor.gray
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Ghosts"
@@ -81,7 +87,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

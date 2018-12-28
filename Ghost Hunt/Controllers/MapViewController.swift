@@ -8,8 +8,9 @@
 
 import UIKit
 import MapKit
+import ARKit
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, ARGhostNodeDelegate, GhostModelsDelegate {
         
     let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
@@ -39,9 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let ghostNine = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostTen = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
     let ghostEleven = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-   
     
-    //var currentGhost: GhostModel?
     var ghostIndex: Int!
     public var ghostObjects: [GhostModel]!
     
@@ -73,6 +72,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         addButtons()
     }
     
+    // returns current ghost model of the delegate (sends info to ARSceneViewController)
+    func getCurrentGhost() -> GhostModel {
+        return ghostObjects[ghostIndex]
+    }
+    
+    // returns ghost objects of the delegate (sends info to GhostListViewController)
+    func getGhostModels() -> [GhostModel] {
+        return ghostObjects
+    }
+    
     func setupVariables() {
         customPins = [ghostPin1, ghostPin2, ghostPin3, ghostPin4, ghostPin5, ghostPin6, ghostPin7, ghostPin8]
         ghostObjects = [ghostOne,ghostTwo, ghostThree, ghostFour, ghostFive, ghostSix,ghostSeven, ghostEight ] as? [GhostModel]
@@ -82,7 +91,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func setupNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title = "Map"
-        self.navigationController?.navigationBar.isHidden = true
+        //self.navigationController?.navigationBar.isHidden = true
     }
     
     // sets up location manager and asks user to allow location
@@ -292,7 +301,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @objc func ghostListButtonPressed() {
         self.toggleButtonPressed()
         let vc = GhostListViewController()
-        vc.ghostModels = self.ghostObjects
+        vc.delegate = self
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
@@ -310,8 +319,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // pushes AR camera onto the navigation controller
     @objc func cameraButtonPressed() {
         let vc = ARSceneViewController()
-        vc.ghostIndex = ghostIndex
-        vc.mapVC = self
+        vc.delegate = self
         self.navigationController?.navigationBar.barTintColor = UIColor.green
         navigationItem.title="Map"  // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)

@@ -29,6 +29,7 @@ class TimerViewController: UIViewController {
     }
     
     func setupView() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.barTintColor = UIColor.green
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Time Remaining"
@@ -50,7 +51,7 @@ class TimerViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
         timer?.invalidate()
     }
     
