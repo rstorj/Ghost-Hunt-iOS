@@ -21,7 +21,6 @@ class ImageRecognitionViewController: UIViewController, ARSCNViewDelegate {
     
     // sets up ar scene view
     func setupView() {
-        self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Capture Ghost"
         

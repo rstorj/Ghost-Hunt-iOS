@@ -73,7 +73,6 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     
    
     func setupView() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         ghostModels = delegate.getGhostModels()
         view.backgroundColor = UIColor.gray
         navigationController?.navigationBar.isHidden = false
@@ -91,6 +90,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isHidden = false
     }
     
