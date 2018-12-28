@@ -51,7 +51,7 @@ class TimerViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         timer?.invalidate()
     }
     
