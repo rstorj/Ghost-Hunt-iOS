@@ -51,6 +51,8 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        // logic for checking which index was clicked and then calling to a viewcontroller based on that.
         // could be better implemented but it works for now.
+        // TODO: create a single page that is popped to and info is updated based on ghostModels[indexPath.row]
+        //       might include a delegate design pattern to pass the data to the vc
         if(indexPath.row == 0) {
             callSnowden()
             print("calling Snowden")
@@ -83,6 +85,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         ghostTableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
         view.addSubview(ghostTableView)
+        self.ghostTableView.tableFooterView = UIView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,7 +118,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         print("we are in snowden")
     }
     
-    @objc func  callVanVlack() {
+    @objc func callVanVlack() {
         
         let vc = VanVlackViewController()
         self.navigationController?.navigationBar.barTintColor = UIColor.blue

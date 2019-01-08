@@ -18,42 +18,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let cameraButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_camera_alt_black_36pt_3x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 43)
     let imageRecognitionButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_wallpaper_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     
-    let ghostPin1 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 1 Name")   // ghost 1 pin
-    let ghostPin2 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 2 Name")   // ghost 2 pin
-    let ghostPin3 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 3 Name")   // ghost 3 pin
-    let ghostPin4 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 4 Name")   // ghost 4 pin
-    let ghostPin5 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 5 Name")   // ghost 5 pin
-    let ghostPin6 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 6 Name")   // ghost 6 pin
-    let ghostPin7 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 7 Name")   // ghost 7 pin
-    let ghostPin8 = MapViewController.generateCustomPointAnnotationWithTitle(title: "Ghost 8 Name")   // ghost 8 pin
-    
-    var customPins: [CustomPointAnnotation]!
-    
-    let ghostOne = GhostModel(fileName: "snowden.scn", ghostName: "Snowden", ghostYear: "1905", locked: true)
-    let ghostTwo = GhostModel(fileName: "vanvlack.scn", ghostName: "Van Vlack", ghostYear: "1900", locked: true)
-    let ghostThree = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostFour = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostFive = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostSix = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostSeven = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostEight = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostNine = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostTen = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
-    let ghostEleven = GhostModel(fileName: "snowden.scn", ghostName: "na", ghostYear: "na", locked: true)
+    var customPins: [CustomPointAnnotation] = []
     
     var ghostIndex: Int!
-    public var ghostObjects: [GhostModel]!
+    public var ghostObjects: [GhostModel]! = []
     
     private var ghosts: [Ghost] = []
-    
-    let coordinate1 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 1 location
-    let coordinate2 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 2 location
-    let coordinate3 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 3 location
-    let coordinate4 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 4 location
-    let coordinate5 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 5 location
-    let coordinate6 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 6 location
-    let coordinate7 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 7 location
-    let coordinate8 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 8 location
     
     var toggled: Bool = false   // ui button toggle
     var cameraButtonEnabled: Bool = false   // used to determine if ready for an AR situation
@@ -67,31 +37,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         getJSON(path: "http://ec2-34-220-116-162.us-west-2.compute.amazonaws.com/api/read.php");
-        setupVariables()
         setupNavigationBar()
         requestLocation()
-        //setupMap()    // TODO: comment this out for use at State Pen
-        setupMapForTesting() // TODO: comment this out when local testing is complete
+        setupMap()
         addButtons()
     }
     
     func getJSON(path: String) {
-        /*let data = try! Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-        let ghostDictionary = try! JSONDecoder().decode([String:[Ghost]].self, from: data)
-        if let gs = ghostDictionary["ghosts"] {
-            ghosts = gs
-            print(ghosts)
-        }*/
-        //fetching the data from the url
         //creating a NSURL
         let url = NSURL(string: path)
         
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
-            
+            if data != nil {
             if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
-                
-                //printing the json in console
-                print(jsonObj!.value(forKey: "ghosts")!)
                 
                 //getting the ghosts tag array from json and converting it to NSArray
                 if let ghostArray = jsonObj!.value(forKey: "ghosts") as? NSArray {
@@ -101,14 +59,53 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         //converting the element to a dictionary
                         if let ghostDict = ghost as? NSDictionary {
                             
-                            //getting the name from the dictionary
-                            if let name = ghostDict.value(forKey: "name") {
+                            // setting up default values incase data is invalid
+                            var ghostFileName = "snowden.scn"
+                            var ghostName = "Snowden"
+                            var ghostBio = "bio"
+                            var ghostLocation = "location1"
+                            var ghostPoints:Int = 0
+                            
+                            //getting the values from the dictionary
+                            if let name = (ghostDict.value(forKey: "name") as? String) {
                                 print(name)
+                                ghostName = name
+                            }
+                            if let bio = (ghostDict.value(forKey: "bio") as? String) {
+                                print(bio)
+                                ghostBio = bio
+                            }
+                            if let model = (ghostDict.value(forKey: "model") as? String) {
+                                print(model)
+                                ghostFileName = model
+                            }
+                            if let location = (ghostDict.value(forKey: "location") as? String) {
+                                print(location)
+                                ghostLocation = location
+                            }
+                            if let points:String = (ghostDict.value(forKey: "points") as? String) {
+                                print(points)
+                                if let pointsInt:Int = Int(points) {
+                                    ghostPoints = pointsInt
+                                }
                             }
                             
+                            // using values to create models
+                            let ghostModel = GhostModel(fileName: ghostFileName, ghostName: ghostName, ghostYear: "1887", ghostBio: ghostBio, ghostLocation: ghostLocation, ghostPoints: ghostPoints, locked: false)
+                            ghostModel.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
+                            self.ghostObjects.append(ghostModel)
+                            
+                            // add pin to map at ghost location
+                            let ghostPin = MapViewController.generateCustomPointAnnotationWithTitle(title: ghostModel.ghostName)   // ghost  pin
+                            self.customPins.append(ghostPin)
+                            self.addCustomPinAtCoordinate(coordinate: ghostModel.getLocation(locationString: ghostLocation), customPin: ghostPin)
+
                         }
                     }
                 }
+            }
+            } else {
+                print("data is nil")
             }
         }).resume()
     }
@@ -121,11 +118,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // returns ghost objects of the delegate (sends info to GhostListViewController)
     func getGhostModels() -> [GhostModel] {
         return ghostObjects
-    }
-    
-    func setupVariables() {
-        customPins = [ghostPin1, ghostPin2, ghostPin3, ghostPin4, ghostPin5, ghostPin6, ghostPin7, ghostPin8]
-        ghostObjects = [ghostOne,ghostTwo, ghostThree, ghostFour, ghostFive, ghostSix,ghostSeven, ghostEight ] as? [GhostModel]
     }
     
     // general setup of navigation bar, starts hidden
@@ -148,20 +140,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let userCoordinate = manager.location?.coordinate {
             var augmentedRealityReady = false
-            for i in 0...7 {
-                if (customPins[i].coordinate.latitude - userCoordinate.latitude < 0.00001 && customPins[i].coordinate.latitude - userCoordinate.latitude > -0.0001) {
-                    if (customPins[i].coordinate.longitude - userCoordinate.longitude < 0.00001 && customPins[i].coordinate.longitude - userCoordinate.longitude > -0.0001) {
-                        customPins[i].subtitle = "Nearby!"
-                        if !augmentedRealityReady {
-                            augmentedRealityReady = true
-                            ghostIndex = i
-                            enableCameraButton()
-                        }
-                    } else {
-                        if !augmentedRealityReady && cameraButtonEnabled {
-                            disableCameraButton()
-                            customPins[i].subtitle = "Wandering the area..."
-                            ghostIndex = nil
+            if customPins.count > 0 {
+                for i in 0...customPins.count - 1 {
+                    if (customPins[i].coordinate.latitude - userCoordinate.latitude < 0.00001 && customPins[i].coordinate.latitude - userCoordinate.latitude > -0.0001) {
+                        if (customPins[i].coordinate.longitude - userCoordinate.longitude < 0.00001 && customPins[i].coordinate.longitude - userCoordinate.longitude > -0.0001) {
+                            customPins[i].subtitle = "Nearby!"
+                            if !augmentedRealityReady {
+                                augmentedRealityReady = true
+                                ghostIndex = i
+                                enableCameraButton()
+                            }
+                        } else {
+                            if !augmentedRealityReady && cameraButtonEnabled {
+                                disableCameraButton()
+                                customPins[i].subtitle = "Wandering the area..."
+                                ghostIndex = nil
+                            }
                         }
                     }
                 }
@@ -181,56 +175,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView?.isZoomEnabled = false
         mapView?.showsUserLocation = true
         mapView?.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 43.602401, longitude: -116.162292), latitudinalMeters: 200, longitudinalMeters: 200)
-        view = mapView
-    }
-    
-    // for testing purposes only. sets map to user location and adds test annotations
-    func setupMapForTesting() {
-        mapView = MKMapView(frame: view.frame)
-        mapView?.delegate = self
-        mapView?.mapType = MKMapType.hybrid
-        mapView?.showsBuildings = true
-        mapView?.isScrollEnabled = false
-        mapView?.isRotateEnabled = false
-        mapView?.isZoomEnabled = false
-        mapView?.showsUserLocation = true
-        if let location = locationManager?.location {
-            mapView?.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), latitudinalMeters: 200, longitudinalMeters: 200)
-            
-            let testCoordinate1 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            addCustomPinAtCoordinate(coordinate: testCoordinate1, customPin: ghostPin1)
-            ghostPin1.subtitle = "(\(testCoordinate1.latitude), \(testCoordinate1.longitude))"
-           
-            
-            let testCoordinate2 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude + 0.0003)
-            addCustomPinAtCoordinate(coordinate: testCoordinate2, customPin: ghostPin2)
-            ghostPin2.subtitle = "(\(testCoordinate2.latitude), \(testCoordinate2.longitude))"
-            
-            let testCoordinate3 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0003, longitude: location.coordinate.longitude + 0.0003)
-            addCustomPinAtCoordinate(coordinate: testCoordinate3, customPin: ghostPin3)
-            ghostPin3.subtitle = "(\(testCoordinate3.latitude), \(testCoordinate3.longitude))"
-            
-            let testCoordinate4 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0003, longitude: location.coordinate.longitude + 0.0003)
-            addCustomPinAtCoordinate(coordinate: testCoordinate4, customPin: ghostPin4)
-            ghostPin4.subtitle = "(\(testCoordinate4.latitude), \(testCoordinate4.longitude))"
-            
-            let testCoordinate5 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0003, longitude: location.coordinate.longitude - 0.0003)
-            addCustomPinAtCoordinate(coordinate: testCoordinate5, customPin: ghostPin5)
-            ghostPin5.subtitle = "(\(testCoordinate5.latitude), \(testCoordinate5.longitude))"
-            
-            let testCoordinate6 = CLLocationCoordinate2D(latitude: location.coordinate.latitude + 0.0003, longitude: location.coordinate.longitude - 0.0003)
-            addCustomPinAtCoordinate(coordinate: testCoordinate6, customPin: ghostPin6)
-            ghostPin6.subtitle = "(\(testCoordinate6.latitude), \(testCoordinate6.longitude))"
-            
-            let testCoordinate7 = CLLocationCoordinate2D(latitude: location.coordinate.latitude - 0.0003, longitude: location.coordinate.longitude)
-            addCustomPinAtCoordinate(coordinate: testCoordinate7, customPin: ghostPin7)
-            ghostPin7.subtitle = "(\(testCoordinate7.latitude), \(testCoordinate7.longitude))"
-            
-            let testCoordinate8 = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude - 0.0003)
-            addCustomPinAtCoordinate(coordinate: testCoordinate8, customPin: ghostPin8)
-            ghostPin8.subtitle = "(\(testCoordinate8.latitude), \(testCoordinate8.longitude))"
-            
-        }
         view = mapView
     }
     
