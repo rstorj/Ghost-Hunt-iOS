@@ -44,6 +44,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var ghostIndex: Int!
     public var ghostObjects: [GhostModel]!
     
+    private var ghosts: [Ghost] = []
+    
     let coordinate1 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 1 location
     let coordinate2 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 2 location
     let coordinate3 = CLLocationCoordinate2D(latitude: 1, longitude: 1) // ghost 3 location
@@ -64,12 +66,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getJSON(path: "http://ec2-34-220-116-162.us-west-2.compute.amazonaws.com/api/read.php");
         setupVariables()
         setupNavigationBar()
         requestLocation()
         //setupMap()    // TODO: comment this out for use at State Pen
         setupMapForTesting() // TODO: comment this out when local testing is complete
         addButtons()
+    }
+    
+    func getJSON(path: String) {
+        /*let data = try! Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+        let ghostDictionary = try! JSONDecoder().decode([String:[Ghost]].self, from: data)
+        if let gs = ghostDictionary["ghosts"] {
+            ghosts = gs
+            print(ghosts)
+        }*/
+        //fetching the data from the url
+        //creating a NSURL
+        let url = NSURL(string: path)
+        
+        URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
+            
+            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+                
+                //printing the json in console
+                print(jsonObj!.value(forKey: "ghosts")!)
+                
+                //getting the ghosts tag array from json and converting it to NSArray
+                if let ghostArray = jsonObj!.value(forKey: "ghosts") as? NSArray {
+                    //looping through all the elements
+                    for ghost in ghostArray{
+                        
+                        //converting the element to a dictionary
+                        if let ghostDict = ghost as? NSDictionary {
+                            
+                            //getting the name from the dictionary
+                            if let name = ghostDict.value(forKey: "name") {
+                                print(name)
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }).resume()
     }
     
     // returns current ghost model of the delegate (sends info to ARSceneViewController)

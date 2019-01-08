@@ -39,6 +39,7 @@
 		981A0EA221A6375A00225504 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981A0EA121A6375A00225504 /* TimerModel.swift */; };
 		987E005721A4FD0E002B3156 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987E005621A4FD0E002B3156 /* MapKit.framework */; };
 		987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E005B21A5341A002B3156 /* TimerViewController.swift */; };
+		988FF9A721E420350039DBB1 /* Ghost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FF9A621E420350039DBB1 /* Ghost.swift */; };
 		98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */; };
 		98B5697921A9F98D00B63C9E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 98B5697821A9F98D00B63C9E /* art.scnassets */; };
 		98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B87DC5219F5D2F008D5E9B /* AppDelegate.swift */; };
@@ -83,6 +84,7 @@
 		981A0EA121A6375A00225504 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		987E005621A4FD0E002B3156 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		987E005B21A5341A002B3156 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		988FF9A621E420350039DBB1 /* Ghost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghost.swift; sourceTree = "<group>"; };
 		98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		98B5697821A9F98D00B63C9E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		98B87DC2219F5D2F008D5E9B /* Ghost Hunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghost Hunt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 				98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */,
 				981A0EA121A6375A00225504 /* TimerModel.swift */,
 				7D8227B421A6858600D084ED /* GhostModel.swift */,
+				988FF9A621E420350039DBB1 /* Ghost.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
 				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
 				7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */,
+				988FF9A721E420350039DBB1 /* Ghost.swift in Sources */,
 				7D8227B521A6858600D084ED /* GhostModel.swift in Sources */,
 				7D31D2C621CCC7C700E23951 /* VanVlackViewController.swift in Sources */,
 				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
