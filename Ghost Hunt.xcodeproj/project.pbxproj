@@ -37,6 +37,8 @@
 		981A0E9F21A61F5E00225504 /* round_sentiment_very_dissatisfied_black_36pt_3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E8D21A61F5D00225504 /* round_sentiment_very_dissatisfied_black_36pt_3x.png */; };
 		981A0EA021A61F5E00225504 /* round_directions_run_black_36pt_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 981A0E8E21A61F5E00225504 /* round_directions_run_black_36pt_1x.png */; };
 		981A0EA221A6375A00225504 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981A0EA121A6375A00225504 /* TimerModel.swift */; };
+		98229A6521E58025000AA1BF /* UpdateGhostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98229A6421E58025000AA1BF /* UpdateGhostsViewController.swift */; };
+		98229A8B21E59190000AA1BF /* GhostHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 98229A8921E59190000AA1BF /* GhostHunt.xcdatamodeld */; };
 		987E005721A4FD0E002B3156 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987E005621A4FD0E002B3156 /* MapKit.framework */; };
 		987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E005B21A5341A002B3156 /* TimerViewController.swift */; };
 		988FF9A721E420350039DBB1 /* Ghost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FF9A621E420350039DBB1 /* Ghost.swift */; };
@@ -65,7 +67,6 @@
 		980A617521A666080020543F /* round_camera_alt_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_1x.png; sourceTree = "<group>"; };
 		980A617621A666080020543F /* round_camera_alt_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_3x.png; sourceTree = "<group>"; };
 		980A617721A666080020543F /* round_camera_alt_black_36pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_camera_alt_black_36pt_2x.png; sourceTree = "<group>"; };
-		981A0E5021A61C2400225504 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		981A0E7D21A61F5C00225504 /* round_add_circle_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_add_circle_black_36pt_1x.png; sourceTree = "<group>"; };
 		981A0E7E21A61F5C00225504 /* round_add_circle_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_add_circle_black_36pt_3x.png; sourceTree = "<group>"; };
 		981A0E7F21A61F5C00225504 /* round_view_list_black_36pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_view_list_black_36pt_2x.png; sourceTree = "<group>"; };
@@ -82,6 +83,8 @@
 		981A0E8D21A61F5D00225504 /* round_sentiment_very_dissatisfied_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_sentiment_very_dissatisfied_black_36pt_3x.png; sourceTree = "<group>"; };
 		981A0E8E21A61F5E00225504 /* round_directions_run_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_directions_run_black_36pt_1x.png; sourceTree = "<group>"; };
 		981A0EA121A6375A00225504 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
+		98229A6421E58025000AA1BF /* UpdateGhostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateGhostsViewController.swift; sourceTree = "<group>"; };
+		98229A8A21E59190000AA1BF /* GhostHunt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GhostHunt.xcdatamodel; sourceTree = "<group>"; };
 		987E005621A4FD0E002B3156 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		987E005B21A5341A002B3156 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		988FF9A621E420350039DBB1 /* Ghost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghost.swift; sourceTree = "<group>"; };
@@ -179,6 +182,7 @@
 				9804470E21ACC4AD0065B5CD /* ImageRecognitionViewController.swift */,
 				7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */,
 				7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */,
+				98229A6421E58025000AA1BF /* UpdateGhostsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -203,12 +207,12 @@
 		98B87DC4219F5D2F008D5E9B /* Ghost Hunt */ = {
 			isa = PBXGroup;
 			children = (
+				98229A8921E59190000AA1BF /* GhostHunt.xcdatamodeld */,
 				98B5697821A9F98D00B63C9E /* art.scnassets */,
 				7D8227B321A6857300D084ED /* Models */,
 				981A0E5221A61D1300225504 /* Icons */,
 				98B87DC5219F5D2F008D5E9B /* AppDelegate.swift */,
 				987E005A21A53376002B3156 /* Controllers */,
-				981A0E5021A61C2400225504 /* Assets.xcassets */,
 				98B87DCE219F5D30008D5E9B /* LaunchScreen.storyboard */,
 				98B87DD1219F5D30008D5E9B /* Info.plist */,
 			);
@@ -319,6 +323,7 @@
 			files = (
 				7D8227B721A687F300D084ED /* GhostListViewController.swift in Sources */,
 				7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */,
+				98229A8B21E59190000AA1BF /* GhostHunt.xcdatamodeld in Sources */,
 				98B87DC8219F5D2F008D5E9B /* MapViewController.swift in Sources */,
 				987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */,
 				7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */,
@@ -329,6 +334,7 @@
 				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
 				7D31D2C421CCBA7D00E23951 /* SnowdenViewController.swift in Sources */,
 				9804470F21ACC4AD0065B5CD /* ImageRecognitionViewController.swift in Sources */,
+				98229A6521E58025000AA1BF /* UpdateGhostsViewController.swift in Sources */,
 				98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */,
 				7D31D2CB21CD9C5F00E23951 /* WarningViewController.swift in Sources */,
 			);
@@ -467,7 +473,6 @@
 		98B87DD5219F5D30008D5E9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 85ZXRYZ5QH;
 				INFOPLIST_FILE = "Ghost Hunt/Info.plist";
@@ -485,7 +490,6 @@
 		98B87DD6219F5D30008D5E9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 85ZXRYZ5QH;
 				INFOPLIST_FILE = "Ghost Hunt/Info.plist";
@@ -522,6 +526,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		98229A8921E59190000AA1BF /* GhostHunt.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				98229A8A21E59190000AA1BF /* GhostHunt.xcdatamodel */,
+			);
+			currentVersion = 98229A8A21E59190000AA1BF /* GhostHunt.xcdatamodel */;
+			path = GhostHunt.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 98B87DBA219F5D2F008D5E9B /* Project object */;
 }

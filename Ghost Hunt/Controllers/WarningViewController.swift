@@ -17,37 +17,63 @@ class WarningViewController: UIViewController {
     }
     
     func setupView() {
-        self.view.backgroundColor = UIColor.orange
-        
-        
-        
+        self.view.backgroundColor = UIColor.gray
+        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationItem.title = "Caution!"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         view.addSubview(startButton)
-        addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: startButton)
-        addConstraintsWithFormat(format: "V:|-16-[v0]-16-|", views: startButton)
+        view.addSubview(warningLabel)
+        let spacing = view.frame.width / 2 - 80
+        let vertSpacing = view.frame.height/2 - 120
+        addConstraintsWithFormat(format: "H:|-8-[v0]-8-|", views: warningLabel)
+        addConstraintsWithFormat(format: "H:|-\(spacing)-[v0(160)]-\(spacing)-|", views: startButton)
+        addConstraintsWithFormat(format: "V:|-\(vertSpacing)-[v0(240)]-\(vertSpacing)-|", views: warningLabel)
+        addConstraintsWithFormat(format: "V:[v0(60)]-50-|", views: startButton)
     }
 
-    let timerLabel: UILabel = {
+    let warningLabel: UILabel = {
         let label = UILabel()
-        label.text = "This is Van Vlacks Page"
+        label.text = "WARNING:\n\nAugmented Reality can be dangerous. Always be aware of your surroundings!"
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.numberOfLines = 5
+        label.backgroundColor = UIColor.red
+        label.layer.borderColor = UIColor.white.cgColor
+        label.layer.borderWidth = 3
+        label.layer.shadowColor = UIColor.darkGray.cgColor
+        label.layer.shadowOffset = CGSize(width: 0, height: 6)
+        label.layer.shadowOpacity = 0.6
+        label.layer.shadowRadius = 6
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.adjustsFontSizeToFitWidth = true
+        label.textColor = UIColor.white
         return label
     }()
     
     let startButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Continue", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 2
+        button.backgroundColor = UIColor.lightGray
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.layer.borderColor = UIColor.green.cgColor
+        button.layer.borderWidth = 2
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowRadius = 6
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
+        button.layer.cornerRadius =  5
+        button.setTitle("Begin", for: .normal)
         button.addTarget(self, action: #selector(continueButtonPressed), for: .touchUpInside)
         return button
     }()
-    // pushes timer view controller onto the navigation controller
+    
     @objc func continueButtonPressed() {
-       
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let vc = MapViewController()
-        // sets back button text for pushed vc
-        self.navigationController?.pushViewController(vc, animated: true)
+        let navigationController = UINavigationController(rootViewController: vc)
+        appDelegate.window?.rootViewController = navigationController
     }
+    
     func addConstraintsWithFormat(format: String, views: UIView...) {
         var viewsDictionary = [String : AnyObject]()
         for (index, view) in views.enumerated() {

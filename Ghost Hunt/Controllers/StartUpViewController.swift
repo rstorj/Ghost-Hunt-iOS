@@ -17,37 +17,70 @@ class StartUpViewController: UIViewController {
     }
     
     func setupView() {
-        self.view.backgroundColor = UIColor.orange
+        self.view.backgroundColor = UIColor.gray
+        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationItem.title = "Ghost Hunt"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         
-        view.addSubview(startButton)
-        addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: startButton)
-        addConstraintsWithFormat(format: "V:|-16-[v0]-16-|", views: startButton)
+        view.addSubview(continueButton)
+        view.addSubview(updateButton)
+        let spacing = view.frame.width/2 - 160 - 8
+        addConstraintsWithFormat(format: "H:|-\(spacing)-[v0(160)]-16-[v1(160)]-\(spacing)-|", views: continueButton, updateButton)
+        addConstraintsWithFormat(format: "V:[v0(60)]-50-|", views: continueButton)
+        addConstraintsWithFormat(format: "V:[v0(60)]-50-|", views: updateButton)
     }
     
-    let timerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "This is Van Vlacks Page"
-        label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 32)
-        label.adjustsFontSizeToFitWidth = true
-        return label
-    }()
-    
-    let startButton: UIButton = {
+    let continueButton: UIButton = {
         let button = UIButton()
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 2
+        button.backgroundColor = UIColor.lightGray
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.layer.borderColor = UIColor.green.cgColor
+        button.layer.borderWidth = 2
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowRadius = 6
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
+        button.layer.cornerRadius =  5
         button.setTitle("Continue", for: .normal)
         button.addTarget(self, action: #selector(continueButtonPressed), for: .touchUpInside)
         return button
     }()
-    // pushes timer view controller onto the navigation controller
+    
+    let updateButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 2
+        button.backgroundColor = UIColor.lightGray
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.layer.borderColor = UIColor.green.cgColor
+        button.layer.borderWidth = 2
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowRadius = 6
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
+        button.layer.cornerRadius =  5
+        button.titleLabel?.numberOfLines = 2
+        button.setTitle("Update Ghosts (WiFi Required)", for: .normal)
+        button.addTarget(self, action: #selector(updateButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     @objc func continueButtonPressed() {
         
-        let vc = MapViewController()
-        // sets back button text for pushed vc
+        let vc = WarningViewController()
+        navigationItem.title = "Ghost Hunt"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func updateButtonPressed() {
+        let vc = UpdateGhostsViewController()
+        navigationItem.title = "Ghost Hunt"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func addConstraintsWithFormat(format: String, views: UIView...) {
         var viewsDictionary = [String : AnyObject]()
         for (index, view) in views.enumerated() {

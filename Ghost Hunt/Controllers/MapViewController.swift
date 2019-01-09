@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import ARKit
+import CoreData
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, ARGhostNodeDelegate, GhostModelsDelegate {
         
@@ -21,9 +22,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var customPins: [CustomPointAnnotation] = []
     
     var ghostIndex: Int!
-    public var ghostObjects: [GhostModel]! = []
+    public var ghostObjects: [GhostModel] = []
     
-    private var ghosts: [Ghost] = []
+    private var ghosts: [NSManagedObject] = []
     
     var toggled: Bool = false   // ui button toggle
     var cameraButtonEnabled: Bool = false   // used to determine if ready for an AR situation
@@ -33,81 +34,57 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     public var blurView:UIVisualEffectView?   // used to blue the app when in background
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getCurrentGhosts()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getJSON(path: "http://ec2-34-220-116-162.us-west-2.compute.amazonaws.com/api/read.php");
+        //getJSON(path: "http://ec2-34-220-116-162.us-west-2.compute.amazonaws.com/api/read.php");
         setupNavigationBar()
         requestLocation()
         setupMap()
         addButtons()
     }
     
-    func getJSON(path: String) {
-        //creating a NSURL
-        let url = NSURL(string: path)
-        
-        URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
-            if data != nil {
-            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
-                
-                //getting the ghosts tag array from json and converting it to NSArray
-                if let ghostArray = jsonObj!.value(forKey: "ghosts") as? NSArray {
-                    //looping through all the elements
-                    for ghost in ghostArray{
-                        
-                        //converting the element to a dictionary
-                        if let ghostDict = ghost as? NSDictionary {
-                            
-                            // setting up default values incase data is invalid
-                            var ghostFileName = "snowden.scn"
-                            var ghostName = "Snowden"
-                            var ghostBio = "bio"
-                            var ghostLocation = "location1"
-                            var ghostPoints:Int = 0
-                            
-                            //getting the values from the dictionary
-                            if let name = (ghostDict.value(forKey: "name") as? String) {
-                                print(name)
-                                ghostName = name
-                            }
-                            if let bio = (ghostDict.value(forKey: "bio") as? String) {
-                                print(bio)
-                                ghostBio = bio
-                            }
-                            if let model = (ghostDict.value(forKey: "model") as? String) {
-                                print(model)
-                                ghostFileName = model
-                            }
-                            if let location = (ghostDict.value(forKey: "location") as? String) {
-                                print(location)
-                                ghostLocation = location
-                            }
-                            if let points:String = (ghostDict.value(forKey: "points") as? String) {
-                                print(points)
-                                if let pointsInt:Int = Int(points) {
-                                    ghostPoints = pointsInt
-                                }
-                            }
-                            
-                            // using values to create models
-                            let ghostModel = GhostModel(fileName: ghostFileName, ghostName: ghostName, ghostYear: "1887", ghostBio: ghostBio, ghostLocation: ghostLocation, ghostPoints: ghostPoints, locked: false)
-                            ghostModel.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
-                            self.ghostObjects.append(ghostModel)
-                            
-                            // add pin to map at ghost location
-                            let ghostPin = MapViewController.generateCustomPointAnnotationWithTitle(title: ghostModel.ghostName)   // ghost  pin
-                            self.customPins.append(ghostPin)
-                            self.addCustomPinAtCoordinate(coordinate: ghostModel.getLocation(locationString: ghostLocation), customPin: ghostPin)
-
-                        }
-                    }
+    func getCurrentGhosts() {
+        if (ghostObjects.count == 0) {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            let managedContext = appDelegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Ghost")
+            do {
+                ghosts = try managedContext.fetch(fetchRequest)
+                for ghost in ghosts {
+                    setupGhost(ghost: ghost)
                 }
+            } catch let error as NSError {
+                print("could not fetch: \(error) - \(error.userInfo)")
             }
-            } else {
-                print("data is nil")
+            if (ghosts.count == 0) {
+                print("ghost list empty!")
             }
-        }).resume()
+        }
+    }
+    
+    func setupGhost(ghost: NSManagedObject) {
+        let ghostFileName: String = ghost.value(forKey: "model") as! String
+        let ghostName: String = ghost.value(forKey: "name") as! String
+        let ghostBio: String = ghost.value(forKey: "bio") as! String
+        let ghostLocation: String = ghost.value(forKey: "location") as! String
+        let ghostPoints: Int = ghost.value(forKey: "points") as! Int
+        
+        // using values to create models
+        let ghostModel = GhostModel(fileName: ghostFileName, ghostName: ghostName, ghostYear: "1887", ghostBio: ghostBio, ghostLocation: ghostLocation, ghostPoints: ghostPoints, locked: false)
+        ghostModel.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
+        self.ghostObjects.append(ghostModel)
+        
+        // add pin to map at ghost location
+        let ghostPin = MapViewController.generateCustomPointAnnotationWithTitle(title: ghostModel.ghostName)   // ghost  pin
+        self.customPins.append(ghostPin)
+        self.addCustomPinAtCoordinate(coordinate: ghostModel.getLocation(locationString: ghostLocation), customPin: ghostPin)
     }
     
     // returns current ghost model of the delegate (sends info to ARSceneViewController)
