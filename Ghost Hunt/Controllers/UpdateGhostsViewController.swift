@@ -91,6 +91,17 @@ class UpdateGhostsViewController: UIViewController {
         
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data, response, error) -> Void in
             if data != nil {
+                
+                let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Ghost")
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+                do {
+                    try managedContext.execute(deleteRequest)
+                    try managedContext.save()
+                }
+                catch {
+                    print ("There was an error deleting")
+                }
+                
                 if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
                     
                     //getting the ghosts tag array from json and converting it to NSArray
@@ -141,7 +152,6 @@ class UpdateGhostsViewController: UIViewController {
                                 ghost.setValue(ghostPoints, forKey: "points")
                                 do {
                                     try managedContext.save()
-                                    //self.ghosts.append(ghost)
                                 } catch let error as NSError {
                                     print("error, could not save: \(error) - \(error.userInfo)")
                                 }
@@ -154,9 +164,8 @@ class UpdateGhostsViewController: UIViewController {
                 print("data is nil")
             }
         }).resume()
-        activityIndicator.stopAnimating()
-        updateButton.setTitle("Download Ghosts", for: .normal)
         UIApplication.shared.endIgnoringInteractionEvents()
+        navigationController?.popViewController(animated: true)
     }
     
     func addConstraintsWithFormat(format: String, views: UIView...) {

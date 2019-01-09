@@ -20,25 +20,6 @@ class GhostModel : NSObject {
     var locked:Bool = false
     var image:UIImage?
     
-    enum Name: String {
-        case Name1 = "Snowden"
-        case Name2 = "Van Vlack"
-        case Name3 = "Name 3"
-        case Name4 = "Name 4"
-        case Name5 = "Name 5"
-        case Name6 = "Name 6"
-        case Name7 = "Name 7"
-        case Name8 = "Name 8"
-        case Name9 = "Name 9"
-        case Name10 = "Name 10"
-        case Name11 = "Name 11"
-        case Name12 = "Name 12"
-        case Name13 = "Name 13"
-        case Name14 = "Name 14"
-        case Name15 = "Name 15"
-        case Name16 = "Name 16"
-    }
-    
     enum Model: String {
         case Model1 = "model1"
         case Model2 = "model2"

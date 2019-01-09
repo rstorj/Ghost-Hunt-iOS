@@ -12,6 +12,11 @@ import ARKit
 import CoreData
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, ARGhostNodeDelegate, GhostModelsDelegate {
+    
+    let defaultFileNames: [String] = ["model1", "model2", "model3", "model4", "model5", "model6", "model7", "model8"]
+    let defaultNames: [String] = ["Snowden", "Van Vlack", "Ghost 3", "Ghost 4", "Ghost 5", "Ghost 6", "Ghost 7", "Ghost 8"]
+    let defaultBios: [String] = ["default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio"]
+    let defaultLocations: [String] = ["location1", "location2", "location3", "location4", "location5", "location6", "location7", "location8"]
         
     let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
     let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
@@ -41,7 +46,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //getJSON(path: "http://ec2-34-220-116-162.us-west-2.compute.amazonaws.com/api/read.php");
         setupNavigationBar()
         requestLocation()
         setupMap()
@@ -64,7 +68,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 print("could not fetch: \(error) - \(error.userInfo)")
             }
             if (ghosts.count == 0) {
-                print("ghost list empty!")
+                setDefaultGhosts()
             }
         }
     }
@@ -85,6 +89,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let ghostPin = MapViewController.generateCustomPointAnnotationWithTitle(title: ghostModel.ghostName)   // ghost  pin
         self.customPins.append(ghostPin)
         self.addCustomPinAtCoordinate(coordinate: ghostModel.getLocation(locationString: ghostLocation), customPin: ghostPin)
+    }
+    
+    func setDefaultGhosts() {
+        for i in 0...7 {
+            // using hard coded default values to create models
+            let ghostModel = GhostModel(fileName: defaultFileNames[i], ghostName: defaultNames[i], ghostYear: "1887", ghostBio: defaultBios[i], ghostLocation: defaultLocations[i], ghostPoints: 25, locked: false)
+            ghostModel.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
+            self.ghostObjects.append(ghostModel)
+            
+            // add pin to map at ghost location
+            let ghostPin = MapViewController.generateCustomPointAnnotationWithTitle(title: ghostModel.ghostName)   // ghost  pin
+            self.customPins.append(ghostPin)
+            self.addCustomPinAtCoordinate(coordinate: ghostModel.getLocation(locationString: defaultLocations[i]), customPin: ghostPin)
+        }
+        
     }
     
     // returns current ghost model of the delegate (sends info to ARSceneViewController)
