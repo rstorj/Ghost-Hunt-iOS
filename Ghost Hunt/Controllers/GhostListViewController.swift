@@ -12,10 +12,11 @@ protocol GhostModelsDelegate {
     func getGhostModels() -> [GhostModel]
 }
 
-class GhostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GhostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GhostModelDelegate {
     
     var delegate:GhostModelsDelegate!
     var ghostModels: [GhostModel]!
+    var selectedIndex: Int = 0
     
     let ghostTableView: UITableView = {
         let tableView = UITableView()
@@ -50,8 +51,14 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = InmateViewController()
+        selectedIndex = indexPath.row
+        vc.delegate = self
         navigationItem.title = "Inmate List"
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func getGhostModel() -> GhostModel {
+        return ghostModels[selectedIndex]
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

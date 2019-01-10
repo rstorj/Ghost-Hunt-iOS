@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D31D2C421CCBA7D00E23951 /* SnowdenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */; };
-		7D31D2C621CCC7C700E23951 /* VanVlackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */; };
 		7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */; };
 		7D31D2CB21CD9C5F00E23951 /* WarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */; };
 		7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82279121A671E900D084ED /* ARSceneViewController.swift */; };
@@ -57,8 +55,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowdenViewController.swift; sourceTree = "<group>"; };
-		7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VanVlackViewController.swift; sourceTree = "<group>"; };
 		7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
 		7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningViewController.swift; sourceTree = "<group>"; };
 		7D82279121A671E900D084ED /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
@@ -120,15 +116,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7D31D2C721CCC9C100E23951 /* Inmate Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				7D31D2C321CCBA7D00E23951 /* SnowdenViewController.swift */,
-				7D31D2C521CCC7C700E23951 /* VanVlackViewController.swift */,
-			);
-			path = "Inmate Controllers";
-			sourceTree = "<group>";
-		};
 		7D8227B321A6857300D084ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +172,6 @@
 		987E005A21A53376002B3156 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				7D31D2C721CCC9C100E23951 /* Inmate Controllers */,
 				98B87DC7219F5D2F008D5E9B /* MapViewController.swift */,
 				987E005B21A5341A002B3156 /* TimerViewController.swift */,
 				7D82279121A671E900D084ED /* ARSceneViewController.swift */,
@@ -344,10 +330,8 @@
 				7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */,
 				988FF9A721E420350039DBB1 /* Ghost.swift in Sources */,
 				7D8227B521A6858600D084ED /* GhostModel.swift in Sources */,
-				7D31D2C621CCC7C700E23951 /* VanVlackViewController.swift in Sources */,
 				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
 				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
-				7D31D2C421CCBA7D00E23951 /* SnowdenViewController.swift in Sources */,
 				98CF111B21E7EC4F00819085 /* InmateViewController.swift in Sources */,
 				9804470F21ACC4AD0065B5CD /* ImageRecognitionViewController.swift in Sources */,
 				98229A6521E58025000AA1BF /* UpdateGhostsViewController.swift in Sources */,

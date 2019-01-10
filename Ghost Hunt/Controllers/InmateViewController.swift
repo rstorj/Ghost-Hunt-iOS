@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol GhostModelDelegate {
+    func getGhostModel() -> GhostModel
+}
+
 class InmateViewController : UIViewController {
+    
+    var delegate: GhostModelDelegate!
+    var ghostModel: GhostModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,15 +24,15 @@ class InmateViewController : UIViewController {
     }
 
     func setupView() {
+        ghostModel = delegate.getGhostModel()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "Stonewall-Tile.jpg")!)
         navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
-        navigationItem.title = "Inmate"
+        navigationItem.title = "\(ghostModel.ghostName)"
         navigationController?.navigationBar.isHidden = false
-        
-        
-        view.addSubview(timerLabel)
-        addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: timerLabel)
-        addConstraintsWithFormat(format: "V:|-16-[v0]-16-|", views: timerLabel)
+        inmateLabel.text = "\(ghostModel.ghostBio)"
+        view.addSubview(inmateLabel)
+        addConstraintsWithFormat(format: "H:|-16-[v0]-16-|", views: inmateLabel)
+        addConstraintsWithFormat(format: "V:|-16-[v0]-16-|", views: inmateLabel)
     }
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
@@ -37,7 +44,7 @@ class InmateViewController : UIViewController {
         
     }
 
-    let timerLabel: UILabel = {
+    let inmateLabel: UILabel = {
         let label = UILabel()
         label.text = "This is the inmate page"
         label.textAlignment = .center
