@@ -16,11 +16,33 @@ class StartUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     func setupView() {
-        self.view.backgroundColor = UIColor.gray
+        //self.view.backgroundColor = UIColor.gray
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "Stonewall-Tile.jpg")!)
         self.navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Ghost Hunt"
+        let logo = UIImage(named: "cropped-ISHS-Header-Logos.png")
+        let imageView = UIImageView(image:logo)
+        view.addSubview(imageView)
+        //let ratio = view.frame.width/200
+        //print(ratio)
+        //let imageSpacing = (self.view.frame.width - imageView.frame.width) / 2
+        addConstraintsWithFormat(format: "H:|[v0]|", views: imageView)
+        //let vertImageSpacing = (self.view.frame.height - imageView.frame.height) / 2
+        addConstraintsWithFormat(format: "V:|-(-2)-[v0(\(view.frame.width/3.84))]", views: imageView)
+        //imageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
+        //self.navigationItem.titleView = imageView
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         
@@ -37,6 +59,7 @@ class StartUpViewController: UIViewController {
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 2
         button.backgroundColor = UIColor.lightGray
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
         button.layer.borderWidth = 2
@@ -55,6 +78,7 @@ class StartUpViewController: UIViewController {
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 2
         button.backgroundColor = UIColor.lightGray
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
         button.layer.borderWidth = 2

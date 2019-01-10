@@ -16,8 +16,18 @@ class WarningViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     func setupView() {
-        self.view.backgroundColor = UIColor.gray
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "Stonewall-Tile.jpg")!)
         navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Caution!"
         self.navigationController?.navigationBar.prefersLargeTitles = true
@@ -54,6 +64,7 @@ class WarningViewController: UIViewController {
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 2
         button.backgroundColor = UIColor.lightGray
+        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
         button.layer.borderWidth = 2

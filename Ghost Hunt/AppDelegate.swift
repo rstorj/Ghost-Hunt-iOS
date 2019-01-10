@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        guard ARWorldTrackingConfiguration.isSupported else {
+        /*guard ARWorldTrackingConfiguration.isSupported else {
             fatalError("""
                 ARKit is not available on this device. For apps that require ARKit
                 for core functionality, use the `arkit` key in the key in the
@@ -27,13 +27,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 In apps where AR is an additive feature, use `isSupported` to
                 determine whether to show UI for launching AR experiences.
             """) // For details, see https://developer.apple.com/documentation/arkit
-        }
+        }*/
         
         setupWindow()
         return true
     }
     
     func setupWindow() {
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         TimerModel.sharedTimer.startOneSecondTimer {
             let timeElapsed = TimerModel.sharedTimer.getTimeElapsed()
             if (timeElapsed >= 5400) {
@@ -44,7 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        //let viewController = MapViewController();
         let viewController = StartUpViewController();
         window?.rootViewController = UINavigationController(rootViewController: viewController)
     }

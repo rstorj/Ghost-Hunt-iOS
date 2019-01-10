@@ -20,7 +20,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     let ghostTableView: UITableView = {
         let tableView = UITableView()
         tableView.isSpringLoaded = true
-        tableView.backgroundColor = UIColor.gray
+        tableView.backgroundColor = UIColor.clear
         tableView.bounces = true
         tableView.isScrollEnabled = true
         return tableView
@@ -32,7 +32,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! GhostCell
-        cell.backgroundColor = UIColor.gray
+        cell.backgroundColor = UIColor.clear
         cell.textLabel?.text = ghostModels[indexPath.row].ghostName
         cell.detailTextLabel?.text = ghostModels[indexPath.row].ghostYear
         if (ghostModels[indexPath.row].locked) {
@@ -49,18 +49,9 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // logic for checking which index was clicked and then calling to a viewcontroller based on that.
-        // could be better implemented but it works for now.
-        // TODO: create a single page that is popped to and info is updated based on ghostModels[indexPath.row]
-        //       might include a delegate design pattern to pass the data to the vc
-        if(indexPath.row == 0) {
-            callSnowden()
-            print("calling Snowden")
-        }
-        if(indexPath.row == 1) {
-            callVanVlack()
-        }
-        
+        let vc = InmateViewController()
+        navigationItem.title = "Inmate List"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -95,6 +86,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.isHidden = false
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "Stonewall-Tile.jpg")!)
     }
     
     // constraint generator takes in format and creates constraints
@@ -108,7 +100,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
     }
     
-    // MARK:- This is where we are calling out to the inmate ViewControllers
+    /*// MARK:- This is where we are calling out to the inmate ViewControllers
     @objc func callSnowden() {
         
         let vc = SnowdenViewController()
@@ -126,7 +118,7 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         navigationItem.title = "Inmate List"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
         print("we are in VanVlack")
-    }
+    }*/
     
 }
 // MARK: - GhostCell class creation
@@ -136,7 +128,7 @@ class GhostCell : UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 30
         imageView.layer.masksToBounds = true
-        imageView.layer.borderColor = UIColor.blue.cgColor
+        imageView.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
         imageView.layer.borderWidth = 2
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -146,7 +138,7 @@ class GhostCell : UITableViewCell {
     let statusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.blue
+        label.textColor = UIColor.black
         label.text = ""
         label.adjustsFontSizeToFitWidth = true
         return label
