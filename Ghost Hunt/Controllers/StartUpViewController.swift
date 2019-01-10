@@ -18,7 +18,8 @@ class StartUpViewController: UIViewController {
     
     func setupView() {
         self.view.backgroundColor = UIColor.gray
-        navigationController?.navigationBar.barTintColor = UIColor.green
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Ghost Hunt"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -37,14 +38,14 @@ class StartUpViewController: UIViewController {
         button.layer.borderWidth = 2
         button.backgroundColor = UIColor.lightGray
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.layer.borderColor = UIColor.green.cgColor
+        button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
         button.layer.borderWidth = 2
         button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowRadius = 6
         button.layer.shadowOpacity = 0.6
         button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.cornerRadius =  5
-        button.setTitle("Continue", for: .normal)
+        button.setTitle("Ghost Hunt", for: .normal)
         button.addTarget(self, action: #selector(continueButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -55,7 +56,7 @@ class StartUpViewController: UIViewController {
         button.layer.borderWidth = 2
         button.backgroundColor = UIColor.lightGray
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.layer.borderColor = UIColor.green.cgColor
+        button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
         button.layer.borderWidth = 2
         button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowRadius = 6

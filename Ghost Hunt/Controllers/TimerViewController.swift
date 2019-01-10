@@ -29,7 +29,7 @@ class TimerViewController: UIViewController {
     }
     
     func setupView() {
-        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationController?.navigationBar.isHidden = false
         navigationItem.title = "Time Remaining"
         

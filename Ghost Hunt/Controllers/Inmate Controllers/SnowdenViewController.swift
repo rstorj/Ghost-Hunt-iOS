@@ -19,7 +19,7 @@ class SnowdenViewController: UIViewController {
     
     func setupView() {
          self.view.backgroundColor = UIColor.orange
-        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
        navigationItem.title = "Inmate Snowden"
         navigationController?.navigationBar.isHidden = false
         

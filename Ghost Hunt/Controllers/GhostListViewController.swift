@@ -112,8 +112,9 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
     @objc func callSnowden() {
         
         let vc = SnowdenViewController()
-        self.navigationController?.navigationBar.barTintColor = UIColor.blue
+        //self.navigationController?.navigationBar.barTintColor = UIColor.black
         navigationItem.title = "Inmate List"    // sets back button text for pushed vc
+        //self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.pushViewController(vc, animated: true)
         print("we are in snowden")
     }

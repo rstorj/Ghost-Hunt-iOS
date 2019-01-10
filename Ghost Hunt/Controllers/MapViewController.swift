@@ -18,11 +18,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let defaultBios: [String] = ["default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio"]
     let defaultLocations: [String] = ["location1", "location2", "location3", "location4", "location5", "location6", "location7", "location8"]
         
-    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
-    let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
-    let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_timer_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
-    let cameraButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_camera_alt_black_36pt_3x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 43)
-    let imageRecognitionButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_wallpaper_black_36pt_2x.png")!, borderColor: UIColor.green.cgColor, cornerRadius: 36)
+    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"round_add_circle_black_36pt_2x.png")!, borderColor: UIColor.IdahoMuseumBlue.cgColor, cornerRadius: 36)
+    let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_view_list_black_36pt_2x.png")!, borderColor: UIColor.IdahoMuseumBlue.cgColor, cornerRadius: 36)
+    let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_timer_black_36pt_2x.png")!, borderColor: UIColor.IdahoMuseumBlue.cgColor, cornerRadius: 36)
+    let cameraButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_camera_alt_black_36pt_3x.png")!, borderColor: UIColor.IdahoMuseumBlue.cgColor, cornerRadius: 43)
+    let imageRecognitionButton = MapViewController.generateButtonWithImage(image: UIImage(named: "round_wallpaper_black_36pt_2x.png")!, borderColor: UIColor.IdahoMuseumBlue.cgColor, cornerRadius: 36)
     
     var customPins: [CustomPointAnnotation] = []
     
@@ -118,7 +118,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // general setup of navigation bar, starts hidden
     func setupNavigationBar() {
-        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Map"
         //self.navigationController?.navigationBar.isHidden = true
     }
@@ -283,7 +284,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.toggleButtonPressed()
         let vc = GhostListViewController()
         vc.delegate = self
-        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -292,7 +293,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @objc func timerButtonPressed() {
         self.toggleButtonPressed()
         let vc = TimerViewController()
-        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -301,7 +302,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @objc func cameraButtonPressed() {
         let vc = ARSceneViewController()
         vc.delegate = self
-        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title="Map"  // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -310,7 +311,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @objc func imageRecognitionButtonPressed() {
         self.toggleButtonPressed()
         let vc = ImageRecognitionViewController()
-        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Map"    // sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }

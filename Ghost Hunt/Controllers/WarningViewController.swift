@@ -18,7 +18,7 @@ class WarningViewController: UIViewController {
     
     func setupView() {
         self.view.backgroundColor = UIColor.gray
-        navigationController?.navigationBar.barTintColor = UIColor.green
+        navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Caution!"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         view.addSubview(startButton)
@@ -55,7 +55,7 @@ class WarningViewController: UIViewController {
         button.layer.borderWidth = 2
         button.backgroundColor = UIColor.lightGray
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.layer.borderColor = UIColor.green.cgColor
+        button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
         button.layer.borderWidth = 2
         button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowRadius = 6

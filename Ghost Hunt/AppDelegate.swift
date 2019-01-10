@@ -120,3 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension UIColor {
+    static let IdahoMuseumBlue = UIColor(red:0.275, green:0.541, blue:0.58, alpha:1.0)
+}
+
