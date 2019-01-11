@@ -14,7 +14,7 @@ class TimerViewController: UIViewController {
         
     let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Time Remaining: 1 hour, 30 minutes"
+        label.text = "Time Remaining: 1 hour, 30 minutes, 00 seconds"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 32)
         label.adjustsFontSizeToFitWidth = true

@@ -24,6 +24,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     var ghostModel: GhostModel!  // current ghost
     var ghostNodeDelegate: ARGhostNodeDelegate!
     var delegate: ARGhostNodeDelegate!
+    var animations = [String : CAAnimation]()
+    var idle:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +44,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        //sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         //sceneView.showsStatistics = true  // for debugging
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(tap:)))  // tap gesture recognizer
@@ -80,9 +82,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         let x = CGFloat(planeAnchor.center.x)
         let y = CGFloat(planeAnchor.center.y)
         let z = CGFloat(planeAnchor.center.z)
-        
         if (ghostNode == nil) {
-            guard let ghostScene = SCNScene(named: "art.scnassets/\(self.ghostModel.fileName)"),
+            guard let ghostScene = SCNScene(named: "art.scnassets/\(self.ghostModel.ghostName)/\(self.ghostModel.fileName)"),
                 let ghost = ghostScene.rootNode.childNode(withName: "ghost", recursively: true)
                 else { return }
             uiMarker = ghost.childNode(withName: "ui marker", recursively: true)
@@ -93,13 +94,28 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             if !self.ghostModel.locked {
                 button?.isHidden = true
                 name?.isHidden = false
+                if let defeatedNode = ghost.childNode(withName: "defeated", recursively: true) {
+                    defeatedNode.isHidden = false
+                }
+                if let lookingaroundNode = ghost.childNode(withName: "lookingaround", recursively: true) {
+                    lookingaroundNode.isHidden = true
+                    lookingaroundNode.removeFromParentNode()
+                }
             } else {
                 name?.isHidden = true
                 button?.isHidden = false
             }
-            ghost.position = SCNVector3(x,y,z)
+            ghost.position = SCNVector3(x,y - 1,z - 1)
             self.ghostNode = ghost
             node.addChildNode(ghost)
+            
+            // Load all the DAE animations
+            // TODO: Add animation selection to website and ghost model so animations can be
+            //       swapped out. OR Have same animations for each ghost
+            loadAnimation(withKey: "taunt", sceneName: "art.scnassets/\(ghostModel.ghostName)/TauntFixed", animationIdentifier: "TauntFixed-1")
+            loadAnimation(withKey: "defeated", sceneName: "art.scnassets/\(ghostModel.ghostName)/DefeatedFixed", animationIdentifier: "DefeatedFixed-1")
+            loadAnimation(withKey: "lookingaround", sceneName: "art.scnassets/\(ghostModel.ghostName)/LookingAroundFixed", animationIdentifier: "LookingAroundFixed-1")
+            loadAnimation(withKey: "praying", sceneName: "art.scnassets/\(ghostModel.ghostName)/PrayingFixed", animationIdentifier: "PrayingFixed-1")
         }
     }
     
@@ -107,7 +123,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         if tap.state == .ended {
             let location: CGPoint = tap.location(in: sceneView)
             let hits = self.sceneView.hitTest(location, options: nil)
-            if !hits.isEmpty{
+            if !hits.isEmpty {
                 let tappedNode = hits.first?.node
                 if (tappedNode?.name == "button") {
                     uiMarker?.isHidden = true
@@ -120,13 +136,52 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
                             button?.isHidden = true
                             takeScreenshot()
                         } else {
-                            uiMarker?.isHidden.toggle()
+                            if (self.ghostModel.locked && idle) {
+                                // locked and tapped animation while idle
+                                print("locked tapped animation")
+                                playAnimation(key: "taunt")
+                            } else if (!self.ghostModel.locked && idle) {
+                                // unlocked and tapped animation while idle
+                                print("unlocked tapped animation")
+                                playAnimation(key: "praying")
+                            } else {
+                                // stop animation
+                                print("stop animation -> return to idle")
+                            }
+                            //uiMarker?.isHidden.toggle()
                         }
+                        idle = !idle
                     }
                 }
                 
             }
         }
+    }
+    
+    func loadAnimation(withKey: String, sceneName:String, animationIdentifier:String) {
+        let sceneURL = Bundle.main.url(forResource: sceneName, withExtension: "dae")
+        let sceneSource = SCNSceneSource(url: sceneURL!, options: nil)
+        
+        if let animationObject = sceneSource?.entryWithIdentifier(animationIdentifier, withClass: CAAnimation.self) {
+            // The animation will only play once
+            animationObject.repeatCount = 5
+            // To create smooth transitions between animations
+            animationObject.fadeInDuration = CGFloat(1)
+            animationObject.fadeOutDuration = CGFloat(0.5)
+            
+            // Store the animation for later use
+            animations[withKey] = animationObject
+        }
+    }
+    
+    func playAnimation(key: String) {
+        // Add the animation to start playing it right away
+        sceneView.scene.rootNode.addAnimation(animations[key]!, forKey: key)
+    }
+    
+    func stopAnimation(key: String) {
+        // Stop the animation with a smooth transition
+        sceneView.scene.rootNode.removeAnimation(forKey: key, blendOutDuration: CGFloat(0.5))
     }
     
     // Present an error message to the user
@@ -163,6 +218,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             })
         }
         AudioServicesPlayAlertSound(1108)
+        self.ghostNode!.childNode(withName: "defeated", recursively: true)?.isHidden = false
+        self.ghostNode!.childNode(withName: "lookingaround", recursively: true)?.isHidden = true
+        self.ghostNode!.childNode(withName: "lookingaround", recursively: true)?.removeFromParentNode()
     }
 }
 
