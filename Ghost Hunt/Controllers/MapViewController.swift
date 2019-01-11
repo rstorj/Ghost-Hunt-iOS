@@ -26,7 +26,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var customPins: [CustomPointAnnotation] = []
     
-    var ghostIndex: Int!
+    var ghostIndex: Int = 0    // TODO: get rid of this default value. Should be nil to start
     public var ghostObjects: [GhostModel] = []
     
     private var ghosts: [NSManagedObject] = []
@@ -50,6 +50,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         requestLocation()
         setupMap()
         addButtons()
+        
+        
+        enableCameraButton()
+        
+        
     }
     
     func getCurrentGhosts() {
@@ -81,7 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let ghostPoints: Int = ghost.value(forKey: "points") as! Int
         
         // using values to create models
-        let ghostModel = GhostModel(fileName: ghostFileName, ghostName: ghostName, ghostYear: "1887", ghostBio: ghostBio, ghostLocation: ghostLocation, ghostPoints: ghostPoints, locked: false)
+        let ghostModel = GhostModel(fileName: ghostFileName, ghostName: ghostName, ghostYear: "1887", ghostBio: ghostBio, ghostLocation: ghostLocation, ghostPoints: ghostPoints, locked: true)
         ghostModel.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
         self.ghostObjects.append(ghostModel)
         
@@ -94,7 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func setDefaultGhosts() {
         for i in 0...7 {
             // using hard coded default values to create models
-            let ghostModel = GhostModel(fileName: defaultFileNames[i], ghostName: defaultNames[i], ghostYear: "1887", ghostBio: defaultBios[i], ghostLocation: defaultLocations[i], ghostPoints: 25, locked: false)
+            let ghostModel = GhostModel(fileName: defaultFileNames[i], ghostName: defaultNames[i], ghostYear: "1887", ghostBio: defaultBios[i], ghostLocation: defaultLocations[i], ghostPoints: 25, locked: true)
             ghostModel.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
             self.ghostObjects.append(ghostModel)
             
@@ -149,9 +154,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                             }
                         } else {
                             if !augmentedRealityReady && cameraButtonEnabled {
-                                disableCameraButton()
+                                //disableCameraButton() //TODO: uncomment this
                                 customPins[i].subtitle = "Wandering the area..."
-                                ghostIndex = nil
+                                ghostIndex = i  // change this to -1
                             }
                         }
                     }

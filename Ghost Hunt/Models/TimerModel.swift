@@ -11,6 +11,7 @@ import UIKit
 class TimerModel: NSObject {
     
     private var timeElapsed:Int = 0
+    private var timeLimit:Int = 5400
     
     static let sharedTimer: TimerModel = {
         let timer = TimerModel()
@@ -47,6 +48,14 @@ class TimerModel: NSObject {
     
     func getTimeElapsed() -> Int {
         return timeElapsed
+    }
+    
+    func getTimeLimit() -> Int {
+        return timeLimit
+    }
+    
+    func addTimeInBackground(seconds: Int) {
+        timeElapsed += seconds
     }
     
     @objc func doJob() {

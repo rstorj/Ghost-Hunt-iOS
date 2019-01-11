@@ -39,12 +39,12 @@ class TimerViewController: UIViewController {
     }
     
     func startUpdateTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { (timer) in
             let formatter = DateComponentsFormatter()
             formatter.allowedUnits = [.hour, .minute, .second]
             formatter.unitsStyle = .full
             
-            let formattedString = formatter.string(from: TimeInterval((5400 - TimerModel.sharedTimer.getTimeElapsed())))!
+            let formattedString = formatter.string(from: TimeInterval((TimerModel.sharedTimer.getTimeLimit() - TimerModel.sharedTimer.getTimeElapsed())))!
             self.timerLabel.text = formattedString
         }
     }

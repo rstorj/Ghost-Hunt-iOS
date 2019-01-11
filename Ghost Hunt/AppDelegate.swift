@@ -14,6 +14,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private var timeStamp:Date?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -38,9 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         TimerModel.sharedTimer.startOneSecondTimer {
             let timeElapsed = TimerModel.sharedTimer.getTimeElapsed()
-            if (timeElapsed >= 5400) {
+            if (timeElapsed >= TimerModel.sharedTimer.getTimeLimit()) {
                 TimerModel.sharedTimer.stopTimer()
                 // TODO: navigate to game over screen
+                print("game over - time limit reached")
             }
             
         }
@@ -58,10 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        timeStamp = Date()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if let prevDate = timeStamp {
+            let seconds = Calendar.current.dateComponents([.second], from: prevDate, to: Date()).second ?? 0
+            TimerModel.sharedTimer.addTimeInBackground(seconds: seconds)
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -123,5 +130,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension UIColor {
     static let IdahoMuseumBlue = UIColor(red:0.275, green:0.541, blue:0.58, alpha:1.0)
+}
+
+extension Date {
+    /// Returns the amount of years from another date
+    func years(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
+    }
+    /// Returns the amount of months from another date
+    func months(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
+    }
+    /// Returns the amount of weeks from another date
+    func weeks(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.weekOfMonth], from: date, to: self).weekOfMonth ?? 0
+    }
+    /// Returns the amount of days from another date
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+    }
+    /// Returns the amount of hours from another date
+    func hours(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
+    }
+    /// Returns the amount of minutes from another date
+    func minutes(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
+    }
+    /// Returns the amount of seconds from another date
+    func seconds(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
+    }
 }
 

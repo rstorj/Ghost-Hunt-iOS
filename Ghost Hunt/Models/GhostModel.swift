@@ -17,7 +17,7 @@ class GhostModel : NSObject {
     var ghostBio: String = ""
     var ghostLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var ghostPoints: Int = 0
-    var locked:Bool = false
+    var locked:Bool = true
     var image:UIImage?
     
     enum Model: String {
@@ -77,7 +77,7 @@ class GhostModel : NSObject {
             case .Model1:
                 return "snowden.scn"
             case .Model2:
-                return "vanvlack.scn"
+                return "snowden.scn"
             case .Model3:
                 return "snowden.scn"
             case .Model4:
