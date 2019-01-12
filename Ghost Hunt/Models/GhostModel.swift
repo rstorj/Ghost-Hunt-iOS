@@ -20,6 +20,11 @@ class GhostModel : NSObject {
     var locked:Bool = true
     var image:UIImage?
     
+    enum Name: String {
+        case Name1 = "Snowden"
+        case Name2 = "Ghost2"
+    }
+    
     enum Model: String {
         case Model1 = "model1"
         case Model2 = "model2"
@@ -62,12 +67,24 @@ class GhostModel : NSObject {
         super.init()
         // Initialize stored properties.
         self.fileName = self.getModel(modelString: fileName)
-        self.ghostName = ghostName
+        self.ghostName = self.getName(nameString: ghostName)
         self.ghostYear = ghostYear
         self.ghostBio = ghostBio
         self.ghostLocation = self.getLocation(locationString: ghostLocation)
         self.ghostPoints = ghostPoints
         self.locked = locked
+    }
+    
+    func getName(nameString: String) -> String {
+        if let name = Name.init(rawValue: nameString) {
+            switch name {
+            case .Name1:
+                return "Snowden"
+            case .Name2:
+                return "Ghost2"
+            }
+        }
+        return "Snowden"
     }
     
     func getModel(modelString: String) -> String {
@@ -77,7 +94,7 @@ class GhostModel : NSObject {
             case .Model1:
                 return "snowden.scn"
             case .Model2:
-                return "snowden.scn"
+                return "ghost2.scn"
             case .Model3:
                 return "snowden.scn"
             case .Model4:
