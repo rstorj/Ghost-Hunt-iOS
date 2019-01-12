@@ -83,7 +83,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         let y = CGFloat(planeAnchor.center.y)
         let z = CGFloat(planeAnchor.center.z)
         if (ghostNode == nil) {
-            guard let ghostScene = SCNScene(named: "art.scnassets/\(self.ghostModel.ghostName)/\(self.ghostModel.fileName)"),
+            guard let ghostScene = SCNScene(named: "art.scnassets/\(self.ghostModel.ghostDirName)/\(self.ghostModel.fileName)"),
                 let ghost = ghostScene.rootNode.childNode(withName: "ghost", recursively: true)
                 else { return }
             uiMarker = ghost.childNode(withName: "ui marker", recursively: true)
@@ -112,10 +112,10 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
             // Load all the DAE animations
             // TODO: Add animation selection to website and ghost model so animations can be
             //       swapped out. OR Have same animations for each ghost
-            loadAnimation(withKey: "taunt", sceneName: "art.scnassets/\(ghostModel.ghostName)/TauntFixed", animationIdentifier: "TauntFixed-1")
-            loadAnimation(withKey: "defeated", sceneName: "art.scnassets/\(ghostModel.ghostName)/DefeatedFixed", animationIdentifier: "DefeatedFixed-1")
-            loadAnimation(withKey: "lookingaround", sceneName: "art.scnassets/\(ghostModel.ghostName)/LookingAroundFixed", animationIdentifier: "LookingAroundFixed-1")
-            loadAnimation(withKey: "praying", sceneName: "art.scnassets/\(ghostModel.ghostName)/PrayingFixed", animationIdentifier: "PrayingFixed-1")
+            loadAnimation(withKey: "taunt", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/TauntFixed", animationIdentifier: "TauntFixed-1")
+            loadAnimation(withKey: "defeated", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/DefeatedFixed", animationIdentifier: "DefeatedFixed-1")
+            loadAnimation(withKey: "lookingaround", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/LookingAroundFixed", animationIdentifier: "LookingAroundFixed-1")
+            loadAnimation(withKey: "praying", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/PrayingFixed", animationIdentifier: "PrayingFixed-1")
         }
     }
     

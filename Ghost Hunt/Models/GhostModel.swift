@@ -13,17 +13,13 @@ import MapKit
 class GhostModel : NSObject {
     var fileName:String = ""
     var ghostName:String = ""
+    var ghostDirName:String = ""
     var ghostYear:String = ""
     var ghostBio: String = ""
     var ghostLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var ghostPoints: Int = 0
     var locked:Bool = true
     var image:UIImage?
-    
-    enum Name: String {
-        case Name1 = "Snowden"
-        case Name2 = "Ghost2"
-    }
     
     enum Model: String {
         case Model1 = "model1"
@@ -67,7 +63,8 @@ class GhostModel : NSObject {
         super.init()
         // Initialize stored properties.
         self.fileName = self.getModel(modelString: fileName)
-        self.ghostName = self.getName(nameString: ghostName)
+        self.ghostName = ghostName
+        self.ghostDirName = self.getDirName(modelString: fileName)
         self.ghostYear = ghostYear
         self.ghostBio = ghostBio
         self.ghostLocation = self.getLocation(locationString: ghostLocation)
@@ -75,16 +72,44 @@ class GhostModel : NSObject {
         self.locked = locked
     }
     
-    func getName(nameString: String) -> String {
-        if let name = Name.init(rawValue: nameString) {
+    func getDirName(modelString: String) -> String {
+        if let name = Model.init(rawValue: modelString) {
             switch name {
-            case .Name1:
-                return "Snowden"
-            case .Name2:
+            case .Model1:
+                return "Ghost1"
+            case .Model2:
                 return "Ghost2"
+            case .Model3:
+                return "Ghost3"
+            case .Model4:
+                return "Ghost4"
+            case .Model5:
+                return "Ghost5"
+            case .Model6:
+                return "Ghost6"
+            case .Model7:
+                return "Ghost7"
+            case .Model8:
+                return "Ghost8"
+            case .Model9:
+                return "Ghost9"
+            case .Model10:
+                return "Ghost10"
+            case .Model11:
+                return "Ghost11"
+            case .Model12:
+                return "Ghost12"
+            case .Model13:
+                return "Ghost13"
+            case .Model14:
+                return "Ghost14"
+            case .Model15:
+                return "Ghost15"
+            case .Model16:
+                return "Ghost16"
             }
         }
-        return "Snowden"
+        return "Ghost1"
     }
     
     func getModel(modelString: String) -> String {
@@ -92,40 +117,40 @@ class GhostModel : NSObject {
             switch model {
                 
             case .Model1:
-                return "snowden.scn"
+                return "ghost1.scn"
             case .Model2:
                 return "ghost2.scn"
             case .Model3:
-                return "snowden.scn"
+                return "ghost3.scn"
             case .Model4:
-                return "snowden.scn"
+                return "ghost4.scn"
             case .Model5:
-                return "snowden.scn"
+                return "ghost5.scn"
             case .Model6:
-                return "snowden.scn"
+                return "ghost6.scn"
             case .Model7:
-                return "snowden.scn"
+                return "ghost7.scn"
             case .Model8:
-                return "snowden.scn"
+                return "ghost8.scn"
             case .Model9:
-                return "snowden.scn"
+                return "ghost9.scn"
             case .Model10:
-                return "snowden.scn"
+                return "ghost10.scn"
             case .Model11:
-                return "snowden.scn"
+                return "ghost11.scn"
             case .Model12:
-                return "snowden.scn"
+                return "ghost12.scn"
             case .Model13:
-                return "snowden.scn"
+                return "ghost13.scn"
             case .Model14:
-                return "snowden.scn"
+                return "ghost14.scn"
             case .Model15:
-                return "snowden.scn"
+                return "ghost15.scn"
             case .Model16:
-                return "snowden.scn"
+                return "ghost16.scn"
             }
         }
-        return "snowden.scn"
+        return "ghost1.scn"
     }
     
     func getLocation(locationString: String) -> CLLocationCoordinate2D {
