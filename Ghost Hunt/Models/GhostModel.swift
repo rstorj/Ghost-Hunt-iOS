@@ -156,38 +156,38 @@ class GhostModel : NSObject {
     func getLocation(locationString: String) -> CLLocationCoordinate2D {
         if let location = Location.init(rawValue: locationString) {
             switch location {
-                case .Location1:
-                    return CLLocationCoordinate2D(latitude: 43.602683, longitude: -116.161966)
-                case .Location2:
-                    return CLLocationCoordinate2D(latitude: 43.602405, longitude: -116.161986)
-                case .Location3:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location4:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location5:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location6:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location7:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location8:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location9:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location10:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location11:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location12:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location13:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location14:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location15:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
-                case .Location16:
-                    return CLLocationCoordinate2D(latitude: 1, longitude: 1)
+                case .Location1:  // top left
+                    return CLLocationCoordinate2D(latitude: 43.602686, longitude: -116.163052)
+                case .Location2:  // top mid
+                    return CLLocationCoordinate2D(latitude: 43.602686, longitude: -116.161985)
+                case .Location3:  // top right
+                    return CLLocationCoordinate2D(latitude: 43.602686, longitude: -116.161370)
+                case .Location4:  // medtop left
+                    return CLLocationCoordinate2D(latitude: 43.602564, longitude: -116.163052)
+                case .Location5: // medtop mid
+                    return CLLocationCoordinate2D(latitude: 43.602564, longitude: -116.161985)
+                case .Location6: //medtop right
+                    return CLLocationCoordinate2D(latitude: 43.602564, longitude: -116.161370)
+                case .Location7: // center left
+                    return CLLocationCoordinate2D(latitude: 43.602397, longitude: -116.163052)
+                case .Location8:    // center mid
+                    return CLLocationCoordinate2D(latitude: 43.602397, longitude: -116.161985)
+                case .Location9:    // center right
+                    return CLLocationCoordinate2D(latitude: 43.602397, longitude: -116.161370)
+                case .Location10:  //medbottom left
+                    return CLLocationCoordinate2D(latitude: 43.602226, longitude: -116.163052)
+                case .Location11:  //medbottom mid
+                    return CLLocationCoordinate2D(latitude: 43.602226, longitude: -116.161985)
+                case .Location12:  //medbottom right
+                    return CLLocationCoordinate2D(latitude: 43.602226, longitude: -116.161370)
+                case .Location13:  //bottom random?
+                    return CLLocationCoordinate2D(latitude: 43.602111, longitude: -116.162449)
+                case .Location14:  //bottom left
+                    return CLLocationCoordinate2D(latitude: 43.601830, longitude: -116.163052)
+                case .Location15:  // bottom mid
+                    return CLLocationCoordinate2D(latitude: 43.601830, longitude: -116.161985)
+                case .Location16:  // bottom right
+                    return CLLocationCoordinate2D(latitude: 43.601830, longitude: -116.161370)
             }
         }
         return CLLocationCoordinate2D(latitude: 0, longitude: 0)

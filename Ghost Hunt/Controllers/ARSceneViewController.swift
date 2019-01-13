@@ -36,9 +36,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     func setupView() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = "Capture Ghost"
         
         ghostModel = delegate.getCurrentGhost()
+        navigationItem.title = "\(ghostModel.ghostName)"
         sceneView = ARSCNView(frame: view.frame)
         view = sceneView
         sceneView.delegate = self

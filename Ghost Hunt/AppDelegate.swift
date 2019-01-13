@@ -37,6 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupWindow() {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let viewController = StartUpViewController();
+        window?.rootViewController = UINavigationController(rootViewController: viewController)
         TimerModel.sharedTimer.startOneSecondTimer {
             let timeElapsed = TimerModel.sharedTimer.getTimeElapsed()
             if (timeElapsed >= TimerModel.sharedTimer.getTimeLimit()) {
@@ -44,12 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // TODO: navigate to game over screen
                 print("game over - time limit reached")
             }
-            
         }
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        let viewController = StartUpViewController();
-        window?.rootViewController = UINavigationController(rootViewController: viewController)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

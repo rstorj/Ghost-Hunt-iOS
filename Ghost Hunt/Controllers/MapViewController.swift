@@ -14,7 +14,7 @@ import CoreData
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, ARGhostNodeDelegate, GhostModelsDelegate {
     
     let defaultFileNames: [String] = ["model1", "model2", "model3", "model4", "model5", "model6", "model7", "model8"]
-    let defaultNames: [String] = ["Snowden", "Van Vlack", "Ghost 3", "Ghost 4", "Ghost 5", "Ghost 6", "Ghost 7", "Ghost 8"]
+    let defaultNames: [String] = ["Snowden", "Ghost 2", "Ghost 3", "Ghost 4", "Ghost 5", "Ghost 6", "Ghost 7", "Ghost 8"]
     let defaultBios: [String] = ["default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio"]
     let defaultLocations: [String] = ["location1", "location2", "location3", "location4", "location5", "location6", "location7", "location8"]
         
@@ -36,12 +36,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var pinAnnotationView:MKPinAnnotationView!  // used to display custom pins
     var mapView:MKMapView?  // map view
     var locationManager:CLLocationManager?  // used to track user location
+    var timer:Timer?
     
     public var blurView:UIVisualEffectView?   // used to blue the app when in background
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getCurrentGhosts()
+        startUpdateTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
     }
 
     override func viewDidLoad() {
@@ -55,6 +62,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         enableCameraButton()
         
         
+    }
+    
+    func startUpdateTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            if TimerModel.sharedTimer.getTimeElapsed() >= TimerModel.sharedTimer.getTimeLimit() {
+                print("time to end game")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let vc = GhostListViewController()
+                vc.gameOver = true
+                vc.delegate = self
+                let navigationContrller = UINavigationController(rootViewController: vc)
+                navigationContrller.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
+                appDelegate.window?.rootViewController = navigationContrller
+            }
+        }
     }
     
     func getCurrentGhosts() {
@@ -86,7 +108,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let ghostPoints: Int = ghost.value(forKey: "points") as! Int
         
         // using values to create models
-        let ghostModel = GhostModel(fileName: ghostFileName, ghostName: ghostName, ghostYear: "1887", ghostBio: ghostBio, ghostLocation: ghostLocation, ghostPoints: ghostPoints, locked: true)
+        let ghostModel = GhostModel(fileName: ghostFileName, ghostName: ghostName, ghostYear: "1887", ghostBio: ghostBio, ghostLocation: ghostLocation, ghostPoints: ghostPoints, locked: false)
         ghostModel.image = UIImage(named: "round_sentiment_very_dissatisfied_black_36pt_2x.png")
         self.ghostObjects.append(ghostModel)
         
@@ -305,6 +327,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // pushes AR camera onto the navigation controller
     @objc func cameraButtonPressed() {
+        if (self.toggled) {
+            self.toggleButtonPressed()
+        }
         let vc = ARSceneViewController()
         vc.delegate = self
         self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue

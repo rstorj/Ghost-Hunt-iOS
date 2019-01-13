@@ -40,6 +40,7 @@
 		987E005721A4FD0E002B3156 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987E005621A4FD0E002B3156 /* MapKit.framework */; };
 		987E005C21A5341A002B3156 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987E005B21A5341A002B3156 /* TimerViewController.swift */; };
 		988FF9A721E420350039DBB1 /* Ghost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FF9A621E420350039DBB1 /* Ghost.swift */; };
+		989C09A621EAD27B00A093E4 /* inmates.png in Resources */ = {isa = PBXBuildFile; fileRef = 989C09A521EAD27B00A093E4 /* inmates.png */; };
 		98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */; };
 		98B5697921A9F98D00B63C9E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 98B5697821A9F98D00B63C9E /* art.scnassets */; };
 		98B87DC6219F5D2F008D5E9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B87DC5219F5D2F008D5E9B /* AppDelegate.swift */; };
@@ -88,6 +89,7 @@
 		987E005621A4FD0E002B3156 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		987E005B21A5341A002B3156 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		988FF9A621E420350039DBB1 /* Ghost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ghost.swift; sourceTree = "<group>"; };
+		989C09A521EAD27B00A093E4 /* inmates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inmates.png; sourceTree = "<group>"; };
 		98A30A3321A5F03600660051 /* CustomPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPointAnnotation.swift; sourceTree = "<group>"; };
 		98B5697821A9F98D00B63C9E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		98B87DC2219F5D2F008D5E9B /* Ghost Hunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ghost Hunt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 		981A0E5221A61D1300225504 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				989C09A521EAD27B00A093E4 /* inmates.png */,
 				98CF112021E7F2B900819085 /* Stonewall-Tile.jpg */,
 				98CF111E21E7F2B400819085 /* footer-us-image.png */,
 				98CF111C21E7F2A600819085 /* cropped-ISHS-Header-Logos.png */,
@@ -306,6 +309,7 @@
 				981A0E9221A61F5E00225504 /* round_timer_black_36pt_3x.png in Resources */,
 				98C583B921A7494B00E83243 /* round_arrow_drop_down_circle_black_36pt_1x.png in Resources */,
 				981A0E9021A61F5E00225504 /* round_add_circle_black_36pt_3x.png in Resources */,
+				989C09A621EAD27B00A093E4 /* inmates.png in Resources */,
 				98CF111F21E7F2B400819085 /* footer-us-image.png in Resources */,
 				981A0E9921A61F5E00225504 /* round_view_list_black_36pt_3x.png in Resources */,
 				980A617921A666080020543F /* round_camera_alt_black_36pt_3x.png in Resources */,

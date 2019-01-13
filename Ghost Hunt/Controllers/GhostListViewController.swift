@@ -14,6 +14,7 @@ protocol GhostModelsDelegate {
 
 class GhostListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GhostModelDelegate {
     
+    public var gameOver:Bool = false
     var delegate:GhostModelsDelegate!
     var ghostModels: [GhostModel]!
     var selectedIndex: Int = 0
@@ -53,7 +54,11 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         let vc = InmateViewController()
         selectedIndex = indexPath.row
         vc.delegate = self
-        navigationItem.title = "Inmate List"
+        if (!gameOver) {
+            navigationItem.title = "Inmate List"
+        } else {
+            navigationItem.title = "Game Over"
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -76,7 +81,11 @@ class GhostListViewController: UIViewController, UITableViewDelegate, UITableVie
         ghostModels = delegate.getGhostModels()
         view.backgroundColor = UIColor.gray
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = "Ghosts"
+        if (!gameOver) {
+            navigationItem.title = "Ghosts"
+        } else {
+            navigationItem.title = "Game Over"
+        }
         ghostTableView.register(GhostCell.self, forCellReuseIdentifier: "cellId")
         ghostTableView.delegate = self
         ghostTableView.dataSource = self
