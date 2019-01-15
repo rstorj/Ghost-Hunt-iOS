@@ -53,6 +53,7 @@
 		98CF111D21E7F2A600819085 /* cropped-ISHS-Header-Logos.png in Resources */ = {isa = PBXBuildFile; fileRef = 98CF111C21E7F2A600819085 /* cropped-ISHS-Header-Logos.png */; };
 		98CF111F21E7F2B400819085 /* footer-us-image.png in Resources */ = {isa = PBXBuildFile; fileRef = 98CF111E21E7F2B400819085 /* footer-us-image.png */; };
 		98CF112121E7F2B900819085 /* Stonewall-Tile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 98CF112021E7F2B900819085 /* Stonewall-Tile.jpg */; };
+		98E5227C21ED9D4700724C45 /* ARFightSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E5227B21ED9D4700724C45 /* ARFightSceneViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +105,7 @@
 		98CF111C21E7F2A600819085 /* cropped-ISHS-Header-Logos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cropped-ISHS-Header-Logos.png"; sourceTree = "<group>"; };
 		98CF111E21E7F2B400819085 /* footer-us-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "footer-us-image.png"; sourceTree = "<group>"; };
 		98CF112021E7F2B900819085 /* Stonewall-Tile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Stonewall-Tile.jpg"; sourceTree = "<group>"; };
+		98E5227B21ED9D4700724C45 /* ARFightSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFightSceneViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 				7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */,
 				98229A6421E58025000AA1BF /* UpdateGhostsViewController.swift */,
 				98CF111A21E7EC4F00819085 /* InmateViewController.swift */,
+				98E5227B21ED9D4700724C45 /* ARFightSceneViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				7D8227B521A6858600D084ED /* GhostModel.swift in Sources */,
 				981A0EA221A6375A00225504 /* TimerModel.swift in Sources */,
 				98A30A3421A5F03600660051 /* CustomPointAnnotation.swift in Sources */,
+				98E5227C21ED9D4700724C45 /* ARFightSceneViewController.swift in Sources */,
 				98CF111B21E7EC4F00819085 /* InmateViewController.swift in Sources */,
 				9804470F21ACC4AD0065B5CD /* ImageRecognitionViewController.swift in Sources */,
 				98229A6521E58025000AA1BF /* UpdateGhostsViewController.swift in Sources */,

@@ -46,12 +46,14 @@ class InmateViewController : UIViewController, ARGhostNodeDelegate {
         view.addSubview(inmateNameLabel)
         view.addSubview(inmateBioLabel)
         view.addSubview(arViewButton)
-        let spacing = self.view.frame.width/2 - 80
+        view.addSubview(arFightButton)
+        let spacing = self.view.frame.width/2 - 160 - 8
         addConstraintsWithFormat(format: "H:|[v0]|", views: inmateImageView)
         addConstraintsWithFormat(format: "V:|-\(60)-[v0(\(self.view.frame.width/1.92))][v1(100)][v2][v3(60)]-50-|", views: inmateImageView, inmateNameLabel, inmateBioLabel, arViewButton)
         addConstraintsWithFormat(format: "H:|[v0]|", views: inmateNameLabel)
+        addConstraintsWithFormat(format: "V:[v0(60)]-50-|", views: arFightButton)
         addConstraintsWithFormat(format: "H:|-8-[v0]-8-|", views: inmateBioLabel)
-        addConstraintsWithFormat(format: "H:|-\(spacing)-[v0(160)]-\(spacing)-|", views: arViewButton)
+        addConstraintsWithFormat(format: "H:|-\(spacing)-[v0(160)]-8-[v1(160)]-\(spacing)-|", views: arViewButton, arFightButton)
     }
     
     func getCurrentGhost() -> GhostModel {
@@ -101,11 +103,38 @@ class InmateViewController : UIViewController, ARGhostNodeDelegate {
         return button
     }()
     
+    let arFightButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 2
+        button.backgroundColor = UIColor.lightGray
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
+        button.layer.borderWidth = 2
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowRadius = 6
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
+        button.layer.cornerRadius =  5
+        button.setTitle("Prison Fight", for: .normal)
+        button.addTarget(self, action: #selector(arFightButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     @objc func arViewButtonPressed() {
         let vc = ARSceneViewController()
         vc.delegate = self
         self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
         navigationItem.title = "Inmate Page"    // sets back button text for pushed vc
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func arFightButtonPressed() {
+        let vc = ARFightSceneViewController()
+        vc.delegate = self
+        self.navigationController?.navigationBar.barTintColor = UIColor.IdahoMuseumBlue
+        navigationItem.title = "Inmate Page"
         navigationController?.pushViewController(vc, animated: true)
     }
 
