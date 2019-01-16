@@ -15,6 +15,8 @@ class ARFightSceneViewController: UIViewController, ARSCNViewDelegate {
     var sceneView: ARSCNView!   // ar scene view
     var attackerNode: SCNNode?    // ghost node in scene
     var defenderNode: SCNNode? // defender node in scene
+    var attackerHealthNode: SCNNode?
+    var defenderHealthNode: SCNNode?
     var button: SCNNode?    // ar button
     var uiMarker: SCNNode?   // ar ui marker
     var name: SCNNode?      // ar ui name
@@ -23,9 +25,16 @@ class ARFightSceneViewController: UIViewController, ARSCNViewDelegate {
     var delegate: ARGhostNodeDelegate!
     var animations = [String : CAAnimation]()
     var attacking:Bool = false
+    var attackable:Bool = true
+    var defenderAttacking:Bool = false
+    var timer:Timer?
+    var attackerHealth: Float = 81
+    var defenderHealth: Float = 81
+    var isDefended = false
     
     let attackButton: UIButton = {
         let button = UIButton()
+        button.adjustsImageWhenDisabled = true
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 2
         button.backgroundColor = UIColor.lightGray
@@ -40,6 +49,26 @@ class ARFightSceneViewController: UIViewController, ARSCNViewDelegate {
         button.layer.cornerRadius =  5
         button.setTitle("Strike", for: .normal)
         button.addTarget(self, action: #selector(attackButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    let defendButton: UIButton = {
+        let button = UIButton()
+        button.adjustsImageWhenDisabled = true
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 2
+        button.backgroundColor = UIColor.lightGray
+        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
+        button.layer.borderWidth = 2
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowRadius = 6
+        button.layer.shadowOpacity = 0.6
+        button.layer.shadowOffset = CGSize(width: 0, height: 6)
+        button.layer.cornerRadius =  5
+        button.setTitle("Defend", for: .normal)
+        button.addTarget(self, action: #selector(defendButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -62,9 +91,21 @@ class ARFightSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.automaticallyUpdatesLighting = true
         
         view.addSubview(attackButton)
-        let spacing = view.frame.width / 2 - 80
-        addConstraintsWithFormat(format: "H:|-\(spacing)-[v0(160)]-\(spacing)-|", views: attackButton)
+        view.addSubview(defendButton)
+        let spacing = view.frame.width / 2 - 160 - 8
+        addConstraintsWithFormat(format: "H:|-\(spacing)-[v0(160)]-8-[v1(160)]-\(spacing)-|", views: attackButton, defendButton)
         addConstraintsWithFormat(format: "V:[v0(60)]-50-|", views: attackButton)
+        addConstraintsWithFormat(format: "V:[v0(60)]-50-|", views: defendButton)
+    }
+    
+    func startUpdateTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { (timer) in
+            if (self.attackable && !self.defenderAttacking) {
+                self.defenderAttacking = true
+                
+                self.playDefenderAttackAnimation()
+            }
+        }
     }
     
     // configures ar world tracking
@@ -88,6 +129,7 @@ class ARFightSceneViewController: UIViewController, ARSCNViewDelegate {
     // Pause the view's session
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        timer?.invalidate()
         //navigationController?.navigationBar.isHidden = true
         sceneView.session.pause()
     }
@@ -102,26 +144,21 @@ class ARFightSceneViewController: UIViewController, ARSCNViewDelegate {
             guard let ghostScene = SCNScene(named: "art.scnassets/fight.scn"),
                 let attacker = ghostScene.rootNode.childNode(withName: "attacker", recursively: true),
                 let defender = ghostScene.rootNode.childNode(withName: "defender", recursively: true)
-            else { return }
+                else { return }
             
-            attacker.position = SCNVector3(x, y - 1, z - 2.50)
-            defender.position = SCNVector3(x, y-1, z - 1.25)
+            attacker.position = SCNVector3(x, y-1, z-2.50)
+            defender.position = SCNVector3(x, y-1, z-1.25)
             self.defenderNode = defender
             self.attackerNode = attacker
             node.addChildNode(attacker)
             node.addChildNode(defender)
-            
+            attackerHealthNode = attacker.childNode(withName: "green", recursively: true)
+            defenderHealthNode = defender.childNode(withName: "green", recursively: true)
             loadAnimation(withKey: "attack", sceneName: "art.scnassets/Ghost1/BoxingFixed", animationIdentifier: "BoxingFixed-1")
             loadAnimation(withKey: "defend", sceneName: "art.scnassets/Ghost9/ReactionFixed", animationIdentifier: "ReactionFixed-1")
-            //node.rotation = SCNVector4(0, 90, 0, 0)
-            // Load all the DAE animations
-            // TODO: Add animation selection to website and ghost model so animations can be
-            //       swapped out. OR Have same animations for each ghost
-            //loadAnimation(withKey: "taunt", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/TauntFixed", animationIdentifier: "TauntFixed-1")
-            //loadAnimation(withKey: "defeated", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/DefeatedFixed", animationIdentifier: "DefeatedFixed-1")
-            //loadAnimation(withKey: "lookingaround", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/LookingAroundFixed", animationIdentifier: "LookingAroundFixed-1")
-            //loadAnimation(withKey: "praying", sceneName: "art.scnassets/\(ghostModel.ghostDirName)/PrayingFixed", animationIdentifier: "PrayingFixed-1")
+            loadAnimation(withKey: "death", sceneName: "art.scnassets/Ghost1/StunnedFixed", animationIdentifier: "StunnedFixed-1")
         }
+        startUpdateTimer()
     }
     
     func loadAnimation(withKey: String, sceneName:String, animationIdentifier:String) {
@@ -141,12 +178,112 @@ class ARFightSceneViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func attackButtonPressed() {
-        playAnimation(key: "attack")
+        if (attackerNode != nil && !attacking) {
+            attacking = true
+            attackButton.isEnabled = false
+            attackButton.setTitle("wait...", for: .normal)
+            attackable = false
+            playAttackAnimation()
+        }
     }
     
-    func playAnimation(key: String) {
-        // Add the animation to start playing it right away
-        sceneView.scene.rootNode.addAnimation(animations[key]!, forKey: key)
+    @objc func defendButtonPressed() {
+        if (attackable && defenderAttacking) {
+            isDefended = true
+            defendButton.setTitle("wait...", for: .normal)
+            perform(#selector(undefended), with: nil, afterDelay: 1.0)
+        }
+    }
+    
+    @objc func undefended() {
+        isDefended = false
+        defendButton.setTitle("Defend", for: .normal)
+    }
+    
+    func playAttackAnimation() {
+        attackerNode?.addAnimation(animations["attack"]!, forKey: "attack")
+        perform(#selector(playDefenderAnimation), with: nil, afterDelay: 0.5)
+        perform(#selector(attackerAttackable), with: nil, afterDelay: 2.0)
+        perform(#selector(allowStrike), with: nil, afterDelay: 3.0)
+    }
+    
+    func dealDamageToAttacker() {
+        var defenseMultiplier: Float = 1.0
+        if (isDefended) {
+            defenseMultiplier = 0.5
+        }
+        attackerHealth -= Float.random(in: 1 ..< 15) * defenseMultiplier
+        print("defended!")
+        let scale = (attackerHealth/81) * 0.81
+        if scale < 0 {
+            attackerHealthNode?.scale = SCNVector3(0, 0, 0)
+            attackerDeath()
+        } else {
+            attackerHealthNode?.scale = SCNVector3(scale, 0.16, 0.11)
+        }
+    }
+    
+    func attackerDeath() {
+        timer?.invalidate()
+        attackerNode?.addAnimation(animations["death"]!, forKey: "death")
+        perform(#selector(destroyAttackerNode), with: nil, afterDelay: 2)
+    }
+    
+    @objc func destroyAttackerNode() {
+        attackerNode!.isHidden = true
+    }
+    
+    @objc func destroyDefenderNode() {
+        defenderNode!.isHidden = true
+        attacking = true
+        isDefended = true
+    }
+    
+    func defenderDeath() {
+        timer?.invalidate()
+        defenderNode?.addAnimation(animations["death"]!, forKey: "death")
+        perform(#selector(destroyDefenderNode), with: nil, afterDelay: 2)
+    }
+    
+    func dealDamageToDefender() {
+        defenderHealth -= Float.random(in: 1 ..< 15)
+        let scale = (defenderHealth/81) * 0.81
+        if scale < 0 {
+            defenderHealthNode?.scale = SCNVector3(0, 0, 0)
+            defenderDeath()
+        } else {
+            defenderHealthNode?.scale = SCNVector3(scale, 0.16, 0.11)
+        }
+    }
+    
+    @objc func attackerAttackable() {
+        attackable = true
+    }
+    
+    @objc func playDefenderAttackAnimation() {
+        defenderNode?.addAnimation(animations["attack"]!, forKey: "attack")
+        perform(#selector(playHitAttackerAnimation), with: nil, afterDelay: 0.5)
+        perform(#selector(allowDefenderStrike), with: nil, afterDelay: 1.25)
+    }
+    
+    @objc func playHitAttackerAnimation() {
+        attackerNode?.addAnimation(animations["defend"]!, forKey: "defend")
+        dealDamageToAttacker()
+    }
+    
+    @objc func playDefenderAnimation() {
+        defenderNode?.addAnimation(animations["defend"]!, forKey: "defend")
+        dealDamageToDefender()
+    }
+    
+    @objc func allowStrike() {
+        attacking = false
+        attackButton.isEnabled = true
+        attackButton.setTitle("Strike", for: .normal)
+    }
+    
+    @objc func allowDefenderStrike() {
+        defenderAttacking = false
     }
     
     func stopAnimation(key: String) {
