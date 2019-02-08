@@ -55,7 +55,7 @@ class TimerViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.isHidden = false
         startUpdateTimer()
     }

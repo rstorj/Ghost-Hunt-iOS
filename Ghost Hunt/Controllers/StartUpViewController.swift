@@ -56,13 +56,9 @@ class StartUpViewController: UIViewController {
     
     let continueButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.layer.borderWidth = 2
-        button.backgroundColor = UIColor.lightGray
+        button.backgroundColor = UIColor.IdahoMuseumBlue
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
-        button.layer.borderWidth = 2
         button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowRadius = 6
         button.layer.shadowOpacity = 0.6
@@ -75,21 +71,17 @@ class StartUpViewController: UIViewController {
     
     let updateButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.layer.borderWidth = 2
-        button.backgroundColor = UIColor.lightGray
+        button.backgroundColor = UIColor.IdahoMuseumBlue
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.layer.borderColor = UIColor.IdahoMuseumBlue.cgColor
-        button.layer.borderWidth = 2
         button.layer.shadowColor = UIColor.darkGray.cgColor
         button.layer.shadowRadius = 6
         button.layer.shadowOpacity = 0.6
         button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.cornerRadius =  5
-        button.titleLabel?.numberOfLines = 2
         button.setTitle("Update Ghosts (WiFi Required)", for: .normal)
         button.addTarget(self, action: #selector(updateButtonPressed), for: .touchUpInside)
+        
         return button
     }()
     
@@ -102,7 +94,7 @@ class StartUpViewController: UIViewController {
     
     @objc func updateButtonPressed() {
         let vc = UpdateGhostsViewController()
-        navigationItem.title = "Ghost Hunt"
+        navigationItem.title = "Ghost Hunt" //sets back button text for pushed vc
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
