@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 import ARKit
 import CoreData
+import MaterialComponents.MaterialButtons
+
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, ARGhostNodeDelegate, GhostModelsDelegate {
     
@@ -18,11 +20,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let defaultBios: [String] = ["default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio", "default bio"]
     let defaultLocations: [String] = ["location1", "location2", "location3", "location4", "location5", "location6", "location7", "location8"]
     
-    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"baseline_menu_white_24dp.png")!, cornerRadius: 28, theColor: UIColor.IdahoMuseumBlue)
-    let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_list_white_24dp.png")!, cornerRadius: 28, theColor: UIColor.MuseumLightGray)
-    let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_alarm_white_24dp.png")!, cornerRadius: 28, theColor: UIColor.MuseumLightGray)
-    let cameraButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_photo_camera_white_24dp.png")!, cornerRadius: 28,theColor: UIColor.IdahoMuseumBlue)
-    let imageRecognitionButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_wallpaper_white_24dp.png")!, cornerRadius: 28, theColor: UIColor.MuseumLightGray)
+    let toggleButton = MapViewController.generateButtonWithImage(image: UIImage(named:"baseline_menu_white_24dp.png")!.withRenderingMode(.alwaysTemplate), cornerRadius: 28, theColor: UIColor.IdahoMuseumBlue)
+    let ghostListButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_list_white_24dp.png")!.withRenderingMode(.alwaysTemplate), cornerRadius: 28, theColor: UIColor.MuseumLightGray)
+    let timerButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_alarm_white_24dp.png")!.withRenderingMode(.alwaysTemplate), cornerRadius: 28, theColor: UIColor.MuseumLightGray)
+    let cameraButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_photo_camera_white_24dp.png")!.withRenderingMode(.alwaysTemplate), cornerRadius: 28,theColor: UIColor.IdahoMuseumBlue)
+    let imageRecognitionButton = MapViewController.generateButtonWithImage(image: UIImage(named: "baseline_wallpaper_white_24dp.png")!.withRenderingMode(.alwaysTemplate), cornerRadius: 28, theColor: UIColor.MuseumLightGray)
     
     var customPins: [CustomPointAnnotation] = []
     
@@ -235,8 +237,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         cameraButton.alpha = 0
         view.addSubview(cameraButton)
         let divider = view.frame.size.width/2 - 43
-        addConstraintsWithFormat(format: "H:|-\(divider)-[v0(86)]-\(divider)-|", views: cameraButton)
-        addConstraintsWithFormat(format: "V:[v0(86)]-29-|", views: cameraButton)
+        addConstraintsWithFormat(format: "H:|-\(divider)-[v0(56)]-\(divider)-|", views: cameraButton)
+        addConstraintsWithFormat(format: "V:[v0(56)]-16-|", views: cameraButton)
         
         imageRecognitionButton.addTarget(self, action: #selector(imageRecognitionButtonPressed), for: .touchUpInside)
         view.addSubview(imageRecognitionButton)
@@ -272,18 +274,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.toggleButton.transform = CGAffineTransform(rotationAngle: 0)
                 self.toggleButton.setImage(UIImage(named:"baseline_menu_white_24dp.png"), for: .normal)
 
-                
                 self.ghostListButton.isEnabled = false
                 self.ghostListButton.alpha = 0
-                self.ghostListButton.frame = CGRect(x: self.view.frame.size.width - 72, y: self.view.frame.size.height - 108, width: 56, height: 56)
+                self.ghostListButton.frame = CGRect(x: self.view.frame.size.width - 72, y: self.view.frame.size.height - 72, width: 56, height: 56)
                 
                 self.timerButton.isEnabled = false
                 self.timerButton.alpha = 0
-                self.timerButton.frame = CGRect(x: self.view.frame.size.width - 72, y: self.view.frame.size.height - 108, width: 56, height: 56)
+                self.timerButton.frame = CGRect(x: self.view.frame.size.width - 72, y: self.view.frame.size.height - 72, width: 56, height: 56)
                 
                 self.imageRecognitionButton.isEnabled = false
                 self.imageRecognitionButton.alpha = 0
-                self.imageRecognitionButton.frame = CGRect(x: self.view.frame.size.width - 72, y: self.view.frame.size.height - 108, width: 56, height: 56)
+                self.imageRecognitionButton.frame = CGRect(x: self.view.frame.size.width - 72, y: self.view.frame.size.height - 72, width: 56, height: 56)
             }) { (success) in
             }
         }
@@ -385,14 +386,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // returns a round button to be added to view
     public static func generateButtonWithImage(image: UIImage, cornerRadius: CGFloat, theColor: UIColor) -> UIButton {
-        let button = UIButton()
+        let button = MDCFloatingButton()
         button.setImage(image, for: .normal)
-        
+        button.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        button.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        button.tintColor = UIColor.white
         button.backgroundColor = theColor
-        button.layer.shadowColor = UIColor.darkGray.cgColor
-        button.layer.shadowRadius = 6
-        button.layer.shadowOpacity = 0.6
-        button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.cornerRadius =  cornerRadius
         return button
     }

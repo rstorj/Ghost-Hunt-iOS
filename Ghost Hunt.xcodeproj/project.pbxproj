@@ -14,6 +14,7 @@
 		1B18551F220D48A4005B16F7 /* baseline_add_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B18551E220D48A4005B16F7 /* baseline_add_white_24dp.png */; };
 		1B185521220D5C84005B16F7 /* baseline_close_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B185520220D5C84005B16F7 /* baseline_close_white_24dp.png */; };
 		1B185523220D684A005B16F7 /* baseline_menu_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B185522220D684A005B16F7 /* baseline_menu_white_24dp.png */; };
+		246B00CCB145EDDE96D7306A /* Pods_Ghost_Hunt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B44EB784BD07771A4698CB1 /* Pods_Ghost_Hunt.framework */; };
 		7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */; };
 		7D31D2CB21CD9C5F00E23951 /* WarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */; };
 		7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82279121A671E900D084ED /* ARSceneViewController.swift */; };
@@ -69,11 +70,14 @@
 		1B18551E220D48A4005B16F7 /* baseline_add_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_add_white_24dp.png; sourceTree = "<group>"; };
 		1B185520220D5C84005B16F7 /* baseline_close_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_close_white_24dp.png; sourceTree = "<group>"; };
 		1B185522220D684A005B16F7 /* baseline_menu_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_menu_white_24dp.png; sourceTree = "<group>"; };
+		331FDCA62A71B1D02AD5D6A2 /* Pods-Ghost Hunt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ghost Hunt.release.xcconfig"; path = "Target Support Files/Pods-Ghost Hunt/Pods-Ghost Hunt.release.xcconfig"; sourceTree = "<group>"; };
+		3B44EB784BD07771A4698CB1 /* Pods_Ghost_Hunt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ghost_Hunt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
 		7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningViewController.swift; sourceTree = "<group>"; };
 		7D82279121A671E900D084ED /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
 		7D8227B421A6858600D084ED /* GhostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostModel.swift; sourceTree = "<group>"; };
 		7D8227B621A687F300D084ED /* GhostListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GhostListViewController.swift; sourceTree = "<group>"; };
+		7DEB0022E0B8070F86077259 /* Pods-Ghost Hunt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ghost Hunt.debug.xcconfig"; path = "Target Support Files/Pods-Ghost Hunt/Pods-Ghost Hunt.debug.xcconfig"; sourceTree = "<group>"; };
 		9804470821ACC2E60065B5CD /* round_wallpaper_black_36pt_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_wallpaper_black_36pt_1x.png; sourceTree = "<group>"; };
 		9804470921ACC2E60065B5CD /* round_wallpaper_black_36pt_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_wallpaper_black_36pt_2x.png; sourceTree = "<group>"; };
 		9804470A21ACC2E70065B5CD /* round_wallpaper_black_36pt_3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round_wallpaper_black_36pt_3x.png; sourceTree = "<group>"; };
@@ -124,12 +128,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				987E005721A4FD0E002B3156 /* MapKit.framework in Frameworks */,
+				246B00CCB145EDDE96D7306A /* Pods_Ghost_Hunt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BC0389CCDE48916E0410CB7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7DEB0022E0B8070F86077259 /* Pods-Ghost Hunt.debug.xcconfig */,
+				331FDCA62A71B1D02AD5D6A2 /* Pods-Ghost Hunt.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7D8227B321A6857300D084ED /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				987E005621A4FD0E002B3156 /* MapKit.framework */,
+				3B44EB784BD07771A4698CB1 /* Pods_Ghost_Hunt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -212,6 +228,7 @@
 				98B87DC4219F5D2F008D5E9B /* Ghost Hunt */,
 				98B87DC3219F5D2F008D5E9B /* Products */,
 				987E005521A4FD0E002B3156 /* Frameworks */,
+				1BC0389CCDE48916E0410CB7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,9 +262,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 98B87DD4219F5D30008D5E9B /* Build configuration list for PBXNativeTarget "Ghost Hunt" */;
 			buildPhases = (
+				CF880C44DA49B47FD3DC5322 /* [CP] Check Pods Manifest.lock */,
 				98B87DBE219F5D2F008D5E9B /* Sources */,
 				98B87DBF219F5D2F008D5E9B /* Frameworks */,
 				98B87DC0219F5D2F008D5E9B /* Resources */,
+				BC86DE1E3A2B8DA988F60433 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -343,6 +362,57 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BC86DE1E3A2B8DA988F60433 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Ghost Hunt/Pods-Ghost Hunt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ghost Hunt/Pods-Ghost Hunt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF880C44DA49B47FD3DC5322 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ghost Hunt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		98B87DBE219F5D2F008D5E9B /* Sources */ = {
@@ -500,15 +570,16 @@
 		};
 		98B87DD5219F5D30008D5E9B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DEB0022E0B8070F86077259 /* Pods-Ghost Hunt.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 85ZXRYZ5QH;
+				DEVELOPMENT_TEAM = NZH562G8PL;
 				INFOPLIST_FILE = "Ghost Hunt/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewpalmer.Ghost-Hunt";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rachelstorjohann.Ghost-Hunt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -517,15 +588,16 @@
 		};
 		98B87DD6219F5D30008D5E9B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 331FDCA62A71B1D02AD5D6A2 /* Pods-Ghost Hunt.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 85ZXRYZ5QH;
+				DEVELOPMENT_TEAM = NZH562G8PL;
 				INFOPLIST_FILE = "Ghost Hunt/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewpalmer.Ghost-Hunt";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rachelstorjohann.Ghost-Hunt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
