@@ -12,6 +12,8 @@
 		1B185519220D45E3005B16F7 /* baseline_photo_camera_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B185518220D45E3005B16F7 /* baseline_photo_camera_white_24dp.png */; };
 		1B18551B220D45FB005B16F7 /* baseline_wallpaper_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B18551A220D45FB005B16F7 /* baseline_wallpaper_white_24dp.png */; };
 		1B18551F220D48A4005B16F7 /* baseline_add_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B18551E220D48A4005B16F7 /* baseline_add_white_24dp.png */; };
+		1B185521220D5C84005B16F7 /* baseline_close_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B185520220D5C84005B16F7 /* baseline_close_white_24dp.png */; };
+		1B185523220D684A005B16F7 /* baseline_menu_white_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B185522220D684A005B16F7 /* baseline_menu_white_24dp.png */; };
 		7D31D2C921CD9C5100E23951 /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */; };
 		7D31D2CB21CD9C5F00E23951 /* WarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */; };
 		7D82279221A671E900D084ED /* ARSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82279121A671E900D084ED /* ARSceneViewController.swift */; };
@@ -65,6 +67,8 @@
 		1B185518220D45E3005B16F7 /* baseline_photo_camera_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_photo_camera_white_24dp.png; sourceTree = "<group>"; };
 		1B18551A220D45FB005B16F7 /* baseline_wallpaper_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_wallpaper_white_24dp.png; sourceTree = "<group>"; };
 		1B18551E220D48A4005B16F7 /* baseline_add_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_add_white_24dp.png; sourceTree = "<group>"; };
+		1B185520220D5C84005B16F7 /* baseline_close_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_close_white_24dp.png; sourceTree = "<group>"; };
+		1B185522220D684A005B16F7 /* baseline_menu_white_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_menu_white_24dp.png; sourceTree = "<group>"; };
 		7D31D2C821CD9C5100E23951 /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
 		7D31D2CA21CD9C5F00E23951 /* WarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarningViewController.swift; sourceTree = "<group>"; };
 		7D82279121A671E900D084ED /* ARSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARSceneViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 		981A0E5221A61D1300225504 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1B185522220D684A005B16F7 /* baseline_menu_white_24dp.png */,
+				1B185520220D5C84005B16F7 /* baseline_close_white_24dp.png */,
 				1B18551E220D48A4005B16F7 /* baseline_add_white_24dp.png */,
 				1B18551A220D45FB005B16F7 /* baseline_wallpaper_white_24dp.png */,
 				1B185518220D45E3005B16F7 /* baseline_photo_camera_white_24dp.png */,
@@ -301,6 +307,7 @@
 				98CF111D21E7F2A600819085 /* cropped-ISHS-Header-Logos.png in Resources */,
 				981A0E9321A61F5E00225504 /* round_directions_run_black_36pt_3x.png in Resources */,
 				9804470B21ACC2E70065B5CD /* round_wallpaper_black_36pt_1x.png in Resources */,
+				1B185521220D5C84005B16F7 /* baseline_close_white_24dp.png in Resources */,
 				1B18551F220D48A4005B16F7 /* baseline_add_white_24dp.png in Resources */,
 				981A0E9121A61F5E00225504 /* round_view_list_black_36pt_2x.png in Resources */,
 				1B185519220D45E3005B16F7 /* baseline_photo_camera_white_24dp.png in Resources */,
@@ -331,6 +338,7 @@
 				981A0E8F21A61F5E00225504 /* round_add_circle_black_36pt_1x.png in Resources */,
 				1B18551B220D45FB005B16F7 /* baseline_wallpaper_white_24dp.png in Resources */,
 				981A0E9B21A61F5E00225504 /* round_view_list_black_36pt_1x.png in Resources */,
+				1B185523220D684A005B16F7 /* baseline_menu_white_24dp.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -79,7 +79,7 @@ class StartUpViewController: UIViewController {
         button.layer.shadowOpacity = 0.6
         button.layer.shadowOffset = CGSize(width: 0, height: 6)
         button.layer.cornerRadius =  5
-        button.setTitle("Update Ghosts (WiFi Required)", for: .normal)
+        button.setTitle("Update Ghosts", for: .normal)
         button.addTarget(self, action: #selector(updateButtonPressed), for: .touchUpInside)
         
         return button
