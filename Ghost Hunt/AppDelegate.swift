@@ -129,6 +129,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension UIColor {
     static let IdahoMuseumBlue = UIColor(red:0.275, green:0.541, blue:0.58, alpha:1.0)
+    static let MuseumLightBlue = UIColor(red:0.75, green: 0.84, blue: 0.85, alpha: 1.0)
+    static let MuseumLightGray = UIColor(red: 0.43, green: 0.43, blue: 0.44, alpha: 1.0)
+    static let MuseumDarkGray = UIColor(red: 0.26, green: 0.24, blue: 0.25, alpha: 1.0)
 }
 
 extension Date {
