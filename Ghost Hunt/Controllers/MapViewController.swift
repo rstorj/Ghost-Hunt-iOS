@@ -59,6 +59,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         requestLocation()
         setupMap()
         addButtons()
+      
+       // self.navigationItem.rightBarButtonItem =  UIBarButtonItem(image: UIImage(named: "baseline_alarm_white_24dp.png"), style: .done, target: self, action: #selector(timerButtonPressed))
+        //self.navigationItem.leftBarButtonItem = UIBarButtonItem(title:"Ghosts", style: .done, target: self, action: #selector(ghostListButtonPressed))
+
         
         
         enableCameraButton()
@@ -227,11 +231,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         ghostListButton.isEnabled = false
         ghostListButton.alpha = 0
         
-        toggleButton.addTarget(self, action: #selector(toggleButtonPressed), for: .touchUpInside)
-        view.addSubview(toggleButton)
-        addConstraintsWithFormat(format: "H:[v0(56)]-16-|", views: toggleButton)
-        addConstraintsWithFormat(format: "V:[v0(56)]-16-|", views: toggleButton)
-        
         cameraButton.addTarget(self, action: #selector(cameraButtonPressed), for: .touchUpInside)
         cameraButton.isEnabled = false
         cameraButton.alpha = 0
@@ -246,6 +245,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         addConstraintsWithFormat(format: "V:[v0(56)]-16-|", views: imageRecognitionButton)
         imageRecognitionButton.isEnabled = false
         imageRecognitionButton.alpha = 0
+        
+        toggleButton.addTarget(self, action: #selector(toggleButtonPressed), for: .touchUpInside)
+        view.addSubview(toggleButton)
+        addConstraintsWithFormat(format: "H:[v0(56)]-16-|", views: toggleButton)
+        addConstraintsWithFormat(format: "V:[v0(56)]-16-|", views: toggleButton)
+        toggleButton.alpha = 1
     }
     
     // animates buttons up or back down
